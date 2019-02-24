@@ -1,0 +1,97 @@
+.navbar {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+.navbar-brand > img {
+  padding: 7px 14px;
+}
+
+.btn-margin {
+  margin: 7px 3px;
+}
+
+.btn-primary {
+  background-color: gold;
+  border-color: #fff;
+  color: #000;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  background-color: #30303c;
+  border-color: #fff;
+  color: #fff;
+}
+
+.btn-primary:active:focus {
+  background-color: gold;
+  border-color: gold;
+  color: #000;
+}
+
+.btn:focus {
+  outline: none !important;
+  box-shadow: none;
+}
+
+.btn {
+  width: 100px;
+}
+
+.logo {
+  height: auto;
+  width: auto;
+  max-height: 72px;
+  max-width: 250px;
+}
+
+.username {
+  color: #000;
+}
+
+nav ul.unstyled {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+nav li {
+  float: left;
+}
+
+nav h4 {
+  color: #30303c;
+}
+
+nav li a {
+  display: block;
+  color: #30303c;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav li a:hover {
+  background-color: gold;
+}
+
+nav button {
+  margin-top: 13px;
+}
