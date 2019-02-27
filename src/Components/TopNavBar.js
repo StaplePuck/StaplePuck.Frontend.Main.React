@@ -12,7 +12,7 @@ class TopNavBar extends Component {
         <div>
           <ul>
             <li>
-              <h4>StaplePuck</h4>
+              <Link to="/">StaplePuck</Link>
             </li>
             <li>
               <Link to="/">All Leagues</Link>
@@ -23,7 +23,7 @@ class TopNavBar extends Component {
             <li>
               {isAuthenticated() && (
                 <li>
-                  <span className="username">Hello Username</span>
+                  <Link to="/user">Hello Username</Link>
                 </li>
               )}
               <Button
