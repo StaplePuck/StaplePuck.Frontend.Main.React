@@ -6,6 +6,7 @@ export default class Auth {
   accessToken;
   idToken;
   expiresAt;
+  userProfile;
 
   auth0 = new auth0.WebAuth({
     domain: AUTH_CONFIG.domain,
@@ -16,6 +17,7 @@ export default class Auth {
   });
 
   constructor() {
+    this.userProfile = null;
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.handleAuthentication = this.handleAuthentication.bind(this);
@@ -48,6 +50,14 @@ export default class Auth {
   getIdToken() {
     return this.idToken;
   }
+
+  getProfile = cb => {
+    if (this.userProfile) return cb(this.userProfile);
+    this.auth0.client.userInfo(this.getAccessToken(), (err, profile) => {
+      if (profile) this.userProfile = profile;
+      cb(profile, err);
+    });
+  };
 
   setSession(authResult) {
     // Set isLoggedIn flag in localStorage
@@ -82,6 +92,7 @@ export default class Auth {
     this.accessToken = null;
     this.idToken = null;
     this.expiresAt = 0;
+    this.userProfile = null;
 
     // Remove isLoggedIn flag from localStorage
     localStorage.removeItem("isLoggedIn");

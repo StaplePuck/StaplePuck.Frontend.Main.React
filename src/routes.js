@@ -10,12 +10,6 @@ import UserProfile from "./Home/UserProfile";
 
 const auth = new Auth();
 
-const handleAuthentication = ({ location }) => {
-  if (/access_token|id_token|error/.test(location.hash)) {
-    auth.handleAuthentication();
-  }
-};
-
 export const makeMainRoutes = () => {
   return (
     <div>
@@ -44,17 +38,13 @@ export const makeMainRoutes = () => {
               auth.isAuthenticated() ? (
                 <MyLeagues auth={auth} {...props} />
               ) : (
-                <Redirect to="/" />
+                <Redirect to="/home" />
               )
             }
           />
           <Route
-            exact
             path="/callback"
-            render={props => {
-              handleAuthentication(props);
-              return <Callback {...props} />;
-            }}
+            render={props => <Callback auth={auth} {...props} />}
           />
         </div>
       </Router>
