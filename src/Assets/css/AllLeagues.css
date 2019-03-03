@@ -1,0 +1,45 @@
+.allLeagues {
+  text-align: center;
+}
+
+.allLeaguesTable {
+  margin-top: 0;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+img {
+  margin: 0;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.mainLogo {
+  height: 150px;
+  width: 150px;
+  display: inline-block;
+}
+
+.ReactTable.-striped .rt-tr.-odd {
+  background-color: #fff;
+  color: #000;
+}
+
+.-even {
+  background-color: lightgray;
+  color: #000;
+}
+
+.ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover {
+  background: lightgoldenrodyellow;
+  color: #000;
+  cursor: pointer;
+}
+
+.pagination-bottom {
+  background-color: #fff;
+}
+
+.ReactTable .-pagination .-center {
+  color: #000;
+}

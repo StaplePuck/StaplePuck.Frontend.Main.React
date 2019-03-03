@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import ApolloClient from "apollo-boost";
-import { ApolloProvider, graphql, Query } from "react-apollo";
+import { ApolloProvider, graphql } from "react-apollo";
 import { gql } from "apollo-boost";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import "../Assets/css/AllLeagues.css";
+import Logo from "../Assets/Images/logo-white-with-name.jpg";
 
 const client = new ApolloClient({
   uri: "http://www.staplepuck.com:5050/graphql"
@@ -33,12 +35,11 @@ const columns = [
   {
     Header: "League",
     accessor: "name",
-    sortable: true,
-    style: { textAlign: "center" },
+    style: { textAlign: "center", textDecoration: "underline" },
     headerStyle: {
       fontWeight: "bold",
-      backgroundColor: "#30303c",
-      color: "white"
+      backgroundColor: "gold",
+      color: "#30303c"
     }
   },
   {
@@ -47,28 +48,30 @@ const columns = [
     style: { textAlign: "center" },
     headerStyle: {
       fontWeight: "bold",
-      backgroundColor: "#30303c",
-      color: "white"
+      backgroundColor: "gold",
+      color: "#30303c"
     }
   },
   {
     Header: "Season",
     accessor: "season.fullName",
+    sortable: false,
     style: { textAlign: "center" },
     headerStyle: {
       fontWeight: "bold",
-      backgroundColor: "#30303c",
-      color: "white"
+      backgroundColor: "gold",
+      color: "#30303c"
     }
   },
   {
     Header: "Description",
     accessor: "description",
+    sortable: false,
     style: { textAlign: "center" },
     headerStyle: {
       fontWeight: "bold",
-      backgroundColor: "#30303c",
-      color: "white"
+      backgroundColor: "gold",
+      color: "#30303c"
     }
   }
 ];
@@ -77,14 +80,15 @@ function ListofLeagues({ loading, error, leagues }) {
   if (loading) return <div>Fetching Leauges</div>;
   if (error) return <div>Error Fetching Leauges</div>;
   return (
-    <div className="App">
+    <div className="allLeagues">
+      <img className="mainLogo" src={Logo} alt="Logo" />
       <ReactTable
         data={leagues}
         columns={columns}
         defaultPageSize={10}
         resizable={false}
-        noDataText="Bloody hell.. No Leagues!"
-        className="-striped -highlight"
+        noDataText="Bloody hell... No leagues!"
+        className="-striped -highlight allLeaguesTable"
       />
     </div>
   );

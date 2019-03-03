@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../Assets/css/NavBar.css";
-import Logo from "../Assets/Images/logo-white-with-name.jpg";
 
 class TopNavBar extends Component {
   render() {
@@ -12,7 +11,7 @@ class TopNavBar extends Component {
         <div>
           <ul>
             <li>
-              <Link to="/">StaplePuck</Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
               <Link to="/">All Leagues</Link>
