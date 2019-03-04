@@ -7,6 +7,7 @@ import TopNavBar from "./Components/TopNavBar";
 import Home from "./Home/AllLeagues";
 import MyLeagues from "./Home/MyLeagues";
 import UserProfile from "./Home/UserProfile";
+import LoginPage from "./Home/Login.js";
 
 const auth = new Auth();
 
@@ -38,9 +39,14 @@ export const makeMainRoutes = () => {
               auth.isAuthenticated() ? (
                 <MyLeagues auth={auth} {...props} />
               ) : (
-                <Redirect to="/home" />
+                <Redirect to="/login" />
               )
             }
+          />
+          <Route
+            exact
+            path="/login"
+            render={props => <LoginPage auth={auth} {...props} />}
           />
           <Route
             path="/callback"
