@@ -1,6 +1,18 @@
 import history from "../history";
 import auth0 from "auth0-js";
 import { AUTH_CONFIG } from "./auth0-variables";
+import ApolloClient from "apollo-boost";
+import { ApolloProvider, graphql } from "react-apollo";
+import { gql } from "apollo-boost";
+
+const getUserQuery = gql`
+  {
+    currentUser {
+      id
+      name
+    }
+  }
+`;
 
 export default class Auth {
   accessToken;
@@ -68,9 +80,33 @@ export default class Auth {
     this.accessToken = authResult.accessToken;
     this.idToken = authResult.idToken;
     this.expiresAt = expiresAt;
-
+    this.getUser();
     // navigate to the home route
     history.replace("/home");
+  }
+
+  getUser() {
+    const client = new ApolloClient({
+      uri: "http://www.staplepuck.com:5050/graphql",
+      headers: {
+        authorization: this.getAccessToken()
+          ? `Bearer ${this.getAccessToken()}`
+          : null
+      }
+    });
+
+    client
+      .query({
+        query: gql`
+          {
+            currentUser {
+              id
+              name
+            }
+          }
+        `
+      })
+      .then(response => console.log(response));
   }
 
   renewSession() {
