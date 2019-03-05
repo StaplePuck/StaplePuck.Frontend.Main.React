@@ -2,17 +2,7 @@ import history from "../history";
 import auth0 from "auth0-js";
 import { AUTH_CONFIG } from "./auth0-variables";
 import ApolloClient from "apollo-boost";
-import { ApolloProvider, graphql } from "react-apollo";
 import { gql } from "apollo-boost";
-
-const getUserQuery = gql`
-  {
-    currentUser {
-      id
-      name
-    }
-  }
-`;
 
 export default class Auth {
   accessToken;
@@ -86,12 +76,11 @@ export default class Auth {
   }
 
   getUser() {
+    console.log(this.idToken);
     const client = new ApolloClient({
       uri: "http://www.staplepuck.com:5050/graphql",
       headers: {
-        authorization: this.getAccessToken()
-          ? `Bearer ${this.getAccessToken()}`
-          : null
+        authorization: this.getIdToken() ? `Bearer ${this.getIdToken()}` : null
       }
     });
 
