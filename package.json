@@ -13,6 +13,7 @@
     "graphql-tag": "^2.10.1",
     "react": "^15.6.1",
     "react-apollo": "^2.4.1",
+    "react-apollo-form": "^0.1.7",
     "react-bootstrap": "^0.31.2",
     "react-dev-utils": "^7.0.3",
     "react-dom": "^15.6.1",

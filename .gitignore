@@ -1,3 +1,4 @@
 node_modules/
 
 src/Auth/auth0-variables.js
+src/App_Config/GlobalVariables.js

@@ -3,12 +3,13 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider, graphql } from "react-apollo";
 import { gql } from "apollo-boost";
 import ReactTable from "react-table";
+import { GLOBAL_CONFIG } from "../App_Config/GlobalVariables";
 import "react-table/react-table.css";
 import "../Assets/css/AllLeagues.css";
 import Logo from "../Assets/Images/logo-white-with-name.jpg";
 
 const client = new ApolloClient({
-  uri: "http://www.staplepuck.com:5050/graphql"
+  uri: GLOBAL_CONFIG.graphQLEndPoint
 });
 
 const getLeaguesQuery = gql`
