@@ -14,6 +14,7 @@ export default class Auth {
     domain: AUTH_CONFIG.domain,
     clientID: AUTH_CONFIG.clientId,
     redirectUri: AUTH_CONFIG.callbackUrl,
+    audience: AUTH_CONFIG.audience,
     responseType: "token id_token",
     scope: "openid"
   });
@@ -76,11 +77,10 @@ export default class Auth {
   }
 
   getUser() {
-    console.log(this.idToken);
     const client = new ApolloClient({
       uri: "http://www.staplepuck.com:5050/graphql",
       headers: {
-        authorization: this.getIdToken() ? `Bearer ${this.getIdToken()}` : null
+        authorization: this.getAccessToken() ? `Bearer ${this.getAccessToken()}` : null
       }
     });
 
