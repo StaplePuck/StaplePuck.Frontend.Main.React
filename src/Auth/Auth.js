@@ -16,6 +16,7 @@ export default class Auth {
     domain: AUTH_CONFIG.domain,
     clientID: AUTH_CONFIG.clientId,
     redirectUri: AUTH_CONFIG.callbackUrl,
+    audience: AUTH_CONFIG.audience,
     responseType: "token id_token",
     scope: "openid"
   });
@@ -78,11 +79,12 @@ export default class Auth {
   }
 
   getUser() {
-    console.log(this.idToken);
     const client = new ApolloClient({
       uri: GLOBAL_CONFIG.graphQLEndPoint,
       headers: {
-        authorization: this.idToken ? `Bearer ${this.idToken}` : null
+        authorization: this.getAccessToken()
+          ? `Bearer ${this.getAccessToken()}`
+          : null
       }
     });
 
@@ -97,8 +99,12 @@ export default class Auth {
           }
         `
       })
-      .then(response => console.log(response.data))
-      .catch(history.replace("/home"));
+      .then(response => {
+        console.log(response.data);
+        if (response == null) {
+          history.replace("/profile");
+        }
+      });
   }
 
   renewSession() {

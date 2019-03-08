@@ -5,8 +5,8 @@ import History from "./history";
 import Callback from "./Callback/Callback";
 import TopNavBar from "./Components/TopNavBar";
 import Home from "./Home/AllLeagues";
-import MyLeagues from "./Home/MyLeagues";
-import UserProfile from "./Home/UserProfile";
+import MyLeagues from "./User/MyLeagues";
+import UserProfile from "./User/UserProfile";
 import LoginPage from "./Home/Login.js";
 
 const auth = new Auth();

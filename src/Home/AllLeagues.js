@@ -1,36 +1,12 @@
 import React, { Component } from "react";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider, graphql } from "react-apollo";
-import { gql } from "apollo-boost";
 import ReactTable from "react-table";
-import { GLOBAL_CONFIG } from "../App_Config/GlobalVariables";
+import { GraphQLClient } from "../App_Config/GlobalVariables";
+import AllLeaguesList from "./Queries/AllLeaguesList";
 import "react-table/react-table.css";
 import "../Assets/css/AllLeagues.css";
 import Logo from "../Assets/Images/logo-white-with-name.jpg";
-
-const client = new ApolloClient({
-  uri: GLOBAL_CONFIG.graphQLEndPoint
-});
-
-const getLeaguesQuery = gql`
-  {
-    leagues {
-      id
-      name
-      description
-      season {
-        id
-        fullName
-        sport {
-          name
-        }
-      }
-      fantasyTeams {
-        id
-      }
-    }
-  }
-`;
 
 const columns = [
   {
@@ -95,7 +71,7 @@ function ListofLeagues({ loading, error, leagues }) {
   );
 }
 
-const LeagueData = graphql(getLeaguesQuery, {
+const LeagueData = graphql(AllLeaguesList, {
   props: ({ data: { loading, leagues } }) => ({
     loading,
     leagues
@@ -108,7 +84,7 @@ class MainLeagues extends Component {
 
     return (
       <div>
-        <ApolloProvider client={client}>
+        <ApolloProvider client={GraphQLClient}>
           <LeagueData />
         </ApolloProvider>
       </div>
