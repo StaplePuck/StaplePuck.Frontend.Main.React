@@ -3,7 +3,7 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider, graphql } from "react-apollo";
 import ReactTable from "react-table";
 import { GraphQLClient } from "../App_Config/GlobalVariables";
-import AllLeaguesList from "./Queries/AllLeaguesList";
+import { AllLeaguesList } from "./Queries/AllLeaguesList";
 import "react-table/react-table.css";
 import "../Assets/css/AllLeagues.css";
 import Logo from "../Assets/Images/logo-white-with-name.jpg";
@@ -80,8 +80,6 @@ const LeagueData = graphql(AllLeaguesList, {
 
 class MainLeagues extends Component {
   render() {
-    const { isAuthenticated, login, logout } = this.props.auth;
-
     return (
       <div>
         <ApolloProvider client={GraphQLClient}>

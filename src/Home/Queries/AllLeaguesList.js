@@ -1,6 +1,6 @@
 import { gql } from "apollo-boost";
 
-const AllLeaguesList = gql`
+export const AllLeaguesList = gql`
   {
     leagues {
       id
@@ -19,5 +19,3 @@ const AllLeaguesList = gql`
     }
   }
 `;
-
-export default AllLeaguesList;
