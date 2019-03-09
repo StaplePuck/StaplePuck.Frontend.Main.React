@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ApolloProvider, graphql } from "react-apollo";
+import { graphql } from "react-apollo";
 import { GetProfileQuery } from "./Queries/GetUserQuery";
 
 //Assests
@@ -28,9 +28,7 @@ class UserProfile extends Component {
       <div className="userProfile">
         <img className="mainLogo" src={Logo} alt="Logo" />
         <h1>Profile</h1>
-        <ApolloProvider client={this.props.auth.client}>
-          <ProfileData />
-        </ApolloProvider>
+        <ProfileData />
       </div>
     );
   }

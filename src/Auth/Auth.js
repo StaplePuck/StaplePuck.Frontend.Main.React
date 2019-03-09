@@ -3,22 +3,13 @@ import auth0 from "auth0-js";
 import { AUTH_CONFIG } from "./auth0-variables";
 import { GLOBAL_CONFIG } from "../App_Config/GlobalVariables";
 import ApolloClient from "apollo-boost";
-import { gql } from "apollo-boost";
 
 export default class Auth {
   accessToken;
   idToken;
   expiresAt;
   userProfile;
-
-  client = new ApolloClient({
-    uri: GLOBAL_CONFIG.graphQLEndPoint,
-    headers: {
-      authorization: this.getAccessToken()
-        ? `Bearer ${this.getAccessToken()}`
-        : null
-    }
-  });
+  apolloClient;
 
   auth0 = new auth0.WebAuth({
     domain: AUTH_CONFIG.domain,
@@ -30,6 +21,14 @@ export default class Auth {
   });
 
   constructor() {
+    this.apolloClient = new ApolloClient({
+      uri: GLOBAL_CONFIG.graphQLEndPoint,
+      headers: {
+        authorization: this.getAccessToken()
+          ? `Bearer ${this.getAccessToken()}`
+          : null
+      }
+    });
     this.userProfile = null;
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
@@ -81,6 +80,14 @@ export default class Auth {
     this.accessToken = authResult.accessToken;
     this.idToken = authResult.idToken;
     this.expiresAt = expiresAt;
+    this.apolloClient = new ApolloClient({
+      uri: GLOBAL_CONFIG.graphQLEndPoint,
+      headers: {
+        authorization: this.getAccessToken()
+          ? `Bearer ${this.getAccessToken()}`
+          : null
+      }
+    });
     // navigate to the home route
     history.replace("/user");
   }

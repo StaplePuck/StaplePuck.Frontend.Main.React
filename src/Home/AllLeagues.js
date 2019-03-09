@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import { ApolloProvider, graphql } from "react-apollo";
-import { GraphQLClient } from "../App_Config/GlobalVariables";
+import { graphql } from "react-apollo";
 
 import { AllLeaguesListQuery } from "./Queries/AllLeaguesListQuery";
 import { AllLeagueColumns } from "./AllLeaguesColumns";
@@ -40,9 +39,7 @@ class MainLeagues extends Component {
   render() {
     return (
       <div>
-        <ApolloProvider client={GraphQLClient}>
-          <LeagueData />
-        </ApolloProvider>
+        <LeagueData />
       </div>
     );
   }
