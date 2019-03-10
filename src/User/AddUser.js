@@ -14,11 +14,14 @@ const ProfileShema = Yup.object().shape({
   handle: Yup.string()
     .min(5, "Must be 5 characters or longer")
     .max(20, "Must be 20 characters or less")
-    .required("Required")
+    .required("Handle is Required"),
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is Required")
 });
 
 const userAddWithSuccess = onUserAddSuccess => {
-  onUserAddSuccess();
+  this.history.replace("/user");
 };
 
 const AddUser = ({ onUserAddSuccess }) => (
@@ -30,17 +33,21 @@ const AddUser = ({ onUserAddSuccess }) => (
 
         {loading && null}
         {error && null}
-        {data && data.UserAdd && userAddWithSuccess(onUserAddSuccess)}
+        {data && data.updateUser && userAddWithSuccess(onUserAddSuccess)}
         <Formik
           initialValues={{
-            handle: ""
+            handle: "",
+            email: ""
           }}
           validationSchema={ProfileShema}
           onSubmit={values => {
             // log submit status
             updateUser({
               variables: {
-                user: values.handle
+                user: {
+                  email: values.handle,
+                  name: values.handle
+                }
               }
             });
           }}
@@ -53,17 +60,28 @@ const AddUser = ({ onUserAddSuccess }) => (
             handleSubmit
           }) => (
             <form onSubmit={handleSubmit}>
+              <span>Handle:</span>
               <input
                 type="Text"
                 name="handle"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.first_name}
+                value={values.handle}
               />
               {touched.handle && errors && errors.handle && (
-                <div className="user-submit-error-block">
-                  {errors.first_name}
-                </div>
+                <div className="user-submit-error-block">{errors.handle}</div>
+              )}
+              <br />
+              <span>Email:</span>
+              <input
+                type="Email"
+                name="email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+              />
+              {touched.email && errors && errors.email && (
+                <div className="user-submit-error-block">{errors.email}</div>
               )}
 
               <div className="user-submit-block">
