@@ -5,6 +5,7 @@ export const GetProfileQuery = gql`
     currentUser {
       id
       name
+      email
     }
   }
 `;

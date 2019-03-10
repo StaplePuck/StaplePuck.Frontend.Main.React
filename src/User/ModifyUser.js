@@ -21,7 +21,7 @@ const ProfileShema = Yup.object().shape({
 });
 
 const userAddWithSuccess = onUserAddSuccess => {
-  onUserAddSuccess();
+  alert("Update success");
 };
 
 const AddUser = ({ onUserAddSuccess }) => (
@@ -45,7 +45,7 @@ const AddUser = ({ onUserAddSuccess }) => (
             updateUser({
               variables: {
                 user: {
-                  email: values.handle,
+                  email: values.email,
                   name: values.handle
                 }
               }

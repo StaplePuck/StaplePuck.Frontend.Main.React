@@ -17,16 +17,13 @@ class UserProfile extends Component {
 
         <Query query={GetProfileQuery}>
           {({ loading, error, data }) => {
-            console.log(data);
-            console.log(this.props.auth.apolloClient);
             if (loading) return <div>Fetching Profile...</div>;
             if (error) return <div>Error Fetching Profile...</div>;
             //Redirect to the Add User form if no user is returned on login
             if (!data || !data.currentUser) {
               history.replace("/adduser");
             }
-
-            return <div>You have a user handle</div>;
+            history.replace("/adduser");
           }}
         </Query>
       </div>
