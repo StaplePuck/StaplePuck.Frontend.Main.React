@@ -1,63 +1,85 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 import { Formik } from "formik";
+import * as Yup from "yup";
+import PropTypes from "prop-types";
+import { Mutation } from "react-apollo";
+import { AddUserQuery } from "./Queries/AddUserQuery";
 
-const AddUser = () => (
-  <div>
-    <h1>Anywhere in your app!</h1>
-    <Formik
-      initialValues={{ email: "", password: "" }}
-      validate={values => {
-        let errors = {};
-        if (!values.email) {
-          errors.email = "Required";
-        } else if (
-          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-        ) {
-          errors.email = "Invalid email address";
-        }
-        return errors;
-      }}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
-      }}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting
-        /* and other goodies */
-      }) => (
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            name="email"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.email}
-          />
-          {errors.email && touched.email && errors.email}
-          <input
-            type="password"
-            name="password"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.password}
-          />
-          {errors.password && touched.password && errors.password}
-          <button type="submit" disabled={isSubmitting}>
-            Submit
-          </button>
-        </form>
-      )}
-    </Formik>
-  </div>
+//Assests
+import "../Assets/css/UserProfile.css";
+import Logo from "../Assets/Images/logo-white-with-name.jpg";
+
+const ProfileShema = Yup.object().shape({
+  handle: Yup.string()
+    .min(5, "Must be 5 characters or longer")
+    .max(20, "Must be 20 characters or less")
+    .required("Required")
+});
+
+const userAddWithSuccess = onUserAddSuccess => {
+  onUserAddSuccess();
+};
+
+const AddUser = ({ onUserAddSuccess }) => (
+  <Mutation mutation={AddUserQuery}>
+    {(updateUser, { loading, error, data }) => (
+      <div className="userProfile">
+        <img className="mainLogo" src={Logo} alt="Logo" />
+        <h3>Set your StaplePuck user handle</h3>
+
+        {loading && null}
+        {error && null}
+        {data && data.UserAdd && userAddWithSuccess(onUserAddSuccess)}
+        <Formik
+          initialValues={{
+            handle: ""
+          }}
+          validationSchema={ProfileShema}
+          onSubmit={values => {
+            // log submit status
+            updateUser({
+              variables: {
+                user: values.handle
+              }
+            });
+          }}
+          render={({
+            values,
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit
+          }) => (
+            <form onSubmit={handleSubmit}>
+              <input
+                type="Text"
+                name="handle"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.first_name}
+              />
+              {touched.handle && errors && errors.handle && (
+                <div className="user-submit-error-block">
+                  {errors.first_name}
+                </div>
+              )}
+
+              <div className="user-submit-block">
+                <Button type="submit">Submit</Button>
+              </div>
+              <div>
+                Your hanlde will be associated with each team you create.
+                <br />
+                Your team names will be set when you create a team.
+              </div>
+            </form>
+          )}
+        />
+      </div>
+    )}
+  </Mutation>
 );
 
 export default AddUser;

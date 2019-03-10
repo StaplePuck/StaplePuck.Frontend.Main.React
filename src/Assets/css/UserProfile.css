@@ -1,3 +1,33 @@
 .userProfile {
   text-align: center;
 }
+
+input {
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  background-color: #30303c;
+  border-color: #fff;
+  color: #fff;
+}
+
+.btn-primary:active:focus {
+  background-color: gold;
+  border-color: gold;
+  color: #000;
+}
+
+.btn:focus {
+  outline: none !important;
+  box-shadow: none;
+}
+
+.btn {
+  width: 100px;
+}
