@@ -11,8 +11,8 @@ import "../Assets/css/AllLeagues.css";
 import Logo from "../Assets/Images/logo-white-with-name.jpg";
 
 function ListofLeagues({ loading, error, leagues }) {
-  if (loading) return <div className="allLeagues">Fetching Leauges...</div>;
-  if (error) return <div className="allLeagues">Error Fetching Leauges</div>;
+  if (loading) return <div className="allLeagues">Fetching Leagues...</div>;
+  if (error) return <div className="allLeagues">Error Fetching Leagues</div>;
   return (
     <div className="allLeagues">
       <img className="mainLogo" src={Logo} alt="Logo" />
