@@ -21,7 +21,7 @@ const ProfileShema = Yup.object().shape({
 });
 
 const userAddWithSuccess = onUserAddSuccess => {
-  this.history.replace("/user");
+  onUserAddSuccess();
 };
 
 const AddUser = ({ onUserAddSuccess }) => (
@@ -31,8 +31,8 @@ const AddUser = ({ onUserAddSuccess }) => (
         <img className="mainLogo" src={Logo} alt="Logo" />
         <h3>Set your StaplePuck user handle</h3>
 
-        {loading && null}
-        {error && null}
+        {/* {loading && null}
+        {error && null} */}
         {data && data.updateUser && userAddWithSuccess(onUserAddSuccess)}
         <Formik
           initialValues={{

@@ -8,7 +8,7 @@ import TopNavBar from "./Components/TopNavBar";
 import Home from "./Home/AllLeagues";
 import MyLeagues from "./User/MyLeagues";
 import UserProfile from "./User/UserProfile";
-import UserAdd from "./User/AddUser";
+import ModifyUser from "./User/ModifyUser";
 import LoginPage from "./Home/Login.js";
 
 const auth = new Auth();
@@ -38,7 +38,7 @@ export const makeMainRoutes = () => {
             <Route
               exact
               path="/adduser"
-              render={props => <UserAdd auth={auth} {...props} />}
+              render={props => <ModifyUser auth={auth} {...props} />}
             />
             <Route
               exact
