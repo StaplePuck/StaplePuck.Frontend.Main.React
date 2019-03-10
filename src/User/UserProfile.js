@@ -14,15 +14,16 @@ class UserProfile extends Component {
       <div className="userProfile">
         <img className="mainLogo" src={Logo} alt="Logo" />
         <h1>Profile</h1>
-
         <Query query={GetProfileQuery}>
           {({ loading, error, data }) => {
             if (loading) return <div>Fetching Profile...</div>;
             if (error) return <div>Error Fetching Profile...</div>;
             //Redirect to the Add User form if no user is returned on login
             if (!data || !data.currentUser) {
+              console.log(data.currentUser);
               history.replace("/adduser");
             }
+            console.log(data.currentUser);
             history.replace("/adduser");
           }}
         </Query>
