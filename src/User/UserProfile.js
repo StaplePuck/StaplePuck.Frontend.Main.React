@@ -1,26 +1,11 @@
 import React, { Component } from "react";
-import { graphql } from "react-apollo";
+import { ApolloProvider, Query } from "react-apollo";
+import history from "../history";
 import { GetProfileQuery } from "./Queries/GetUserQuery";
 
 //Assests
 import "../Assets/css/UserProfile.css";
 import Logo from "../Assets/Images/logo-white-with-name.jpg";
-
-function GetProfileData({ loading, error, data }) {
-  if (loading) return <div>Fetching Profile...</div>;
-  if (error) return <div>Error Fetching Profile...</div>;
-  if (!data || !data.currentUser) {
-    console.log(data);
-    return <div>No Profile..</div>;
-  }
-}
-
-const ProfileData = graphql(GetProfileQuery, {
-  props: ({ data: { loading, data } }) => ({
-    loading,
-    data
-  })
-})(GetProfileData);
 
 class UserProfile extends Component {
   render() {
@@ -28,7 +13,19 @@ class UserProfile extends Component {
       <div className="userProfile">
         <img className="mainLogo" src={Logo} alt="Logo" />
         <h1>Profile</h1>
-        <ProfileData />
+        <ApolloProvider client={this.props.auth.apolloClient}>
+          <Query query={GetProfileQuery}>
+            {({ loading, error, data }) => {
+              console.log(data);
+              if (loading) return <div>Fetching Profile...</div>;
+              if (error) return <div>Error Fetching Profile...</div>;
+              //Redirect to the Add User form if no user is returned on login
+              if (!data || !data.currentUser) {
+                history.replace("/adduser");
+              }
+            }}
+          </Query>
+        </ApolloProvider>
       </div>
     );
   }
