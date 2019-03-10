@@ -1,10 +1,48 @@
 import React, { Component } from "react";
+import ReactTable from "react-table";
+import "react-table/react-table.css";
+import { graphql } from "react-apollo";
 
-class MyLeagues extends Component {
+import { MyLeaguesListQuery } from "./Queries/MyLeaguesListQuery";
+import { MyLeagueColumns } from "./MyLeaguesColumns";
+
+//Assests
+import "../Assets/css/MyLeagues.css";
+import Logo from "../Assets/Images/logo-white-with-name.jpg";
+
+function ListofLeagues({ loading, error, leagues }) {
+  if (loading) return <div className="myLeagues">Fetching Leauges...</div>;
+  if (error) return <div className="myLeagues">Error Fetching Leauges</div>;
+  return (
+    <div className="myLeagues">
+      <img className="mainLogo" src={Logo} alt="Logo" />
+      <ReactTable
+        data={leagues}
+        columns={MyLeagueColumns}
+        defaultPageSize={10}
+        resizable={false}
+        noDataText="Bloody hell... No leagues!"
+        className="-striped -highlight allLeaguesTable"
+      />
+    </div>
+  );
+}
+
+const LeagueData = graphql(MyLeaguesListQuery, {
+  props: ({ data: { loading, leagues } }) => ({
+    loading,
+    leagues
+  })
+})(ListofLeagues);
+
+class MainLeagues extends Component {
   render() {
-    const { isAuthenticated, login, logout } = this.props.auth;
-    return <div>A list of all the users leagues will go here</div>;
+    return (
+      <div>
+        <LeagueData />
+      </div>
+    );
   }
 }
 
-export default MyLeagues;
+export default MainLeagues;
