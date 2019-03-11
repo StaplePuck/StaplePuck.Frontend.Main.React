@@ -5,6 +5,7 @@ import { ApolloProvider } from "react-apollo";
 import History from "./history";
 import Callback from "./Callback/Callback";
 import TopNavBar from "./Components/TopNavBar";
+import MyLeaguesNavBar from "./Components/MyLeaguesNavBar"
 import Home from "./Home/AllLeagues";
 import MyLeagues from "./User/MyLeagues";
 import UserProfile from "./User/UserProfile";
@@ -20,6 +21,9 @@ export const makeMainRoutes = () => {
         <Router history={History}>
           <div>
             <TopNavBar auth={auth} />
+            <div>
+              <MyLeaguesNavBar auth={auth} />
+            </div>
             <Route
               exact
               path="/"

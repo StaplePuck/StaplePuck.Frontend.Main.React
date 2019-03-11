@@ -7,11 +7,10 @@ class MyLeaguesNavBar extends Component {
   render() {
     const { isAuthenticated, login, logout } = this.props.auth;
     return (
-      <nav>
-        <div>
-
-        </div>
-      </nav>
+      <div className="myLeaguesNavBar">
+        <h5>Your Leagues</h5>
+        <a href="#">Test</a>
+      </div>
     );
   }
 }

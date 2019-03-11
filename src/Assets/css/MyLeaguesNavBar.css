@@ -1,100 +1,37 @@
-.myleagues-navbar {
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0;
+.myLeaguesNavBar {
+  height: 100%; 
+  width: 160px; 
+  position: fixed; 
+  right: 0;
+  background-color: #ffffff;
+  overflow-x: hidden; 
 }
 
-.myleagues-navbar-brand {
-  display: flex;
-  align-items: center;
-}
-.myleagues-navbar-brand > img {
-  padding: 7px 14px;
-}
-
-.btn-margin {
-  margin: 7px 3px;
-}
-
-.btn-primary {
-  background-color: gold;
-  border-color: #fff;
-  color: #000;
-}
-
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary.active,
-.open > .dropdown-toggle.btn-primary {
-  background-color: #30303c;
-  border-color: #fff;
-  color: #fff;
-}
-
-.btn-primary:active:focus {
-  background-color: gold;
-  border-color: gold;
-  color: #000;
-}
-
-.btn:focus {
-  outline: none !important;
-  box-shadow: none;
-}
-
-.btn {
-  width: 100px;
-}
-
-.logo {
-  height: auto;
-  width: auto;
-  max-height: 72px;
-  max-width: 250px;
-}
-
-.username {
-  color: #000;
-}
-nav {
-  border-bottom: solid 1px #30303c;
-}
-
-nav ul.unstyled {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #fff;
-}
-
-nav li {
-  float: left;
-}
-
-nav h4 {
+.myLeaguesNavBar h5 {
   color: #30303c;
-}
-
-nav li a {
+  text-align: left;
   display: block;
-  color: #30303c;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+  font-weight: bold;
+  padding-left: 10px;
 }
 
-nav li a:hover {
+.myLeaguesNavBar a {
+  text-decoration: none;
+  color: #30303c;
+  display: block;
+  padding-left: 20px;
+}
+
+.myLeaguesNavBar a:hover {
   background-color: gold;
 }
 
-nav button {
-  margin-top: 13px;
+.main {
+  margin-left: 160px; 
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }
