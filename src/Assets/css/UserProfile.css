@@ -2,25 +2,65 @@
   text-align: center;
 }
 
-input {
+.userForm {
+  display: block;
+}
+
+.userFormSet {
+  display: block;
+  -webkit-margin-start: 2px;
+  -webkit-margin-end: 2px;
+  -webkit-padding-before: 0.35em;
+  -webkit-padding-start: 0.75em;
+  -webkit-padding-end: 0.75em;
+  -webkit-padding-after: 0.625em;
+}
+
+.userFormGroup {
+  display: block;
+  margin: 0;
+  padding: 0.35em 0 0.75em;
+}
+
+.userFormGroup label {
+  text-align: right;
+  display: inline-block;
+  vertical-align: middle;
+  width: 8em;
+  margin: 0 1em 0 0;
+}
+
+form input[type="text"],
+input[type="Email"],
+input[type="Checkbox"] {
   color: #000;
-  margin-bottom: 10px;
+  padding: 0.5em 0.6em;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  vertical-align: middle;
+  box-sizing: border-box;
 }
 
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary.active,
-.open > .dropdown-toggle.btn-primary {
-  background-color: #30303c;
-  border-color: #fff;
-  color: #fff;
+.userFormErrorBlock {
+  color: red;
 }
 
-.btn-primary:active:focus {
+.btn-default {
   background-color: gold;
   border-color: gold;
   color: #000;
+  margin: 2em;
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+  background-color: #30303c;
+  border-color: #fff;
+  color: #fff;
 }
 
 .btn:focus {
