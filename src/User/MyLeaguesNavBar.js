@@ -9,7 +9,7 @@ class MyLeaguesNavBar extends Component {
     return (
       <div className="myLeaguesNavBar">
         <h5>Your Leagues</h5>
-        <a href="#">Test</a>
+        <a href={this.props.myleaguesuri}>{this.props.leagues}</a>
       </div>
     );
   }
