@@ -14,6 +14,7 @@ import LoginPage from "./Home/Login.js";
 
 const auth = new Auth();
 
+
 export const makeMainRoutes = () => {
   return (
     <ApolloProvider client={auth.apolloClient}>
@@ -21,17 +22,22 @@ export const makeMainRoutes = () => {
         <Router history={History}>
           <div>
             <TopNavBar auth={auth} />
-            <div>
-              <MyLeaguesNavBar 
+            <div> 
+              <MyLeaguesNavBar // TODO: This routing should be refactored.
                 auth={auth} 
-                leagues={"Test"} 
-                myleaguesuri={props =>
-                  auth.isAuthenticated() ? (
-                    <MyLeagues auth={auth} {...props} />
-                  ) : (
-                    <Redirect to="/login" />
-                  )
-                }
+                leagues={"TODO: GetTeams"} 
+                myleaguesuri={props => 
+                  <Route
+                    exact
+                    path="/myleagues"
+                    render={props =>
+                      auth.isAuthenticated() ? (
+                        <MyLeagues auth={auth} {...props} />
+                      ) : (
+                        <Redirect to="/login" />
+                      )
+                    }
+                />}
               />
             </div>
             <Route
