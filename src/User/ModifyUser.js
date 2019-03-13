@@ -7,7 +7,6 @@ import { AddUserQuery } from "./Queries/AddUserQuery";
 
 //Assests
 import "../Assets/css/UserProfile.css";
-import Logo from "../Assets/Images/logo-white-with-name.jpg";
 
 const ProfileShema = Yup.object().shape({
   handle: Yup.string()
@@ -20,18 +19,15 @@ const ProfileShema = Yup.object().shape({
   receiveEmails: Yup.boolean()
 });
 
-const userAddWithSuccess = onUserAddSuccess => {
-  alert("Update success");
-};
-
-const AddUser = ({ onUserAddSuccess }) => (
+const AddUser = () => (
   <Mutation mutation={AddUserQuery}>
     {(updateUser, { loading, error, data }) => (
       <div className="userProfile">
         <div className="userform">
-          <img className="mainLogo" src={Logo} alt="Logo" />
           <h5>Set your StaplePuck user handle</h5>
-          {data && data.updateUser && userAddWithSuccess(onUserAddSuccess)}
+          {loading && console.log(this.props.auth.accessToken)}
+          {error && console.log(error)}
+          {data && data.updateUser && alert("Update Success")}
           <Formik
             initialValues={{
               handle: "",

@@ -7,6 +7,8 @@
   },
   "dependencies": {
     "apollo-boost": "^0.1.28",
+    "apollo-cache-inmemory": "^1.5.1",
+    "apollo-link-http": "^1.5.12",
     "auth0-js": "^9.0.0",
     "bootstrap": "^3.3.7",
     "formik": "^1.5.1",

@@ -2,7 +2,9 @@ import history from "../history";
 import auth0 from "auth0-js";
 import { AUTH_CONFIG } from "./auth0-variables";
 import { GLOBAL_CONFIG } from "../App_Config/GlobalVariables";
-import ApolloClient from "apollo-boost";
+import ApolloClient from "apollo-client";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { HttpLink } from "apollo-link-http";
 
 export default class Auth {
   accessToken;
@@ -22,12 +24,15 @@ export default class Auth {
 
   constructor() {
     this.apolloClient = new ApolloClient({
-      uri: GLOBAL_CONFIG.graphQLEndPoint,
-      headers: {
-        authorization: this.getAccessToken()
-          ? `Bearer ${this.getAccessToken()}`
-          : null
-      }
+      link: new HttpLink({
+        uri: GLOBAL_CONFIG.graphQLEndPoint,
+        headers: {
+          authorization: this.getAccessToken()
+            ? `Bearer ${this.getAccessToken()}`
+            : null
+        }
+      }),
+      cache: new InMemoryCache()
     });
     this.userProfile = null;
     this.login = this.login.bind(this);
@@ -81,12 +86,15 @@ export default class Auth {
     this.idToken = authResult.idToken;
     this.expiresAt = expiresAt;
     this.apolloClient = new ApolloClient({
-      uri: GLOBAL_CONFIG.graphQLEndPoint,
-      headers: {
-        authorization: this.getAccessToken()
-          ? `Bearer ${this.getAccessToken()}`
-          : null
-      }
+      link: new HttpLink({
+        uri: GLOBAL_CONFIG.graphQLEndPoint,
+        headers: {
+          authorization: this.getAccessToken()
+            ? `Bearer ${this.getAccessToken()}`
+            : null
+        }
+      }),
+      cache: new InMemoryCache()
     });
     // navigate to the home route
     history.replace("/user");
