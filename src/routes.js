@@ -20,10 +20,11 @@ export const makeMainRoutes = () => {
     <ApolloProvider client={auth.apolloClient}>
       <div>
         <Router history={History}>
-          <div>
-            <TopNavBar auth={auth} />
+          <div> 
+            <TopNavBar auth={auth} />  
             <div> 
               <MyLeaguesNavBar // TODO: This routing should be refactored.
+                               // I'm not sure if the NavBars should be here or not.
                 auth={auth} 
                 leagues={"TODO: GetTeams"} 
                 myleaguesuri={props => 
