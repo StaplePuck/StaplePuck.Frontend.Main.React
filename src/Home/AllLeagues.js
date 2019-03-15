@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import { graphql } from "react-apollo";
+import { GLOBAL_CONFIG } from "../App_Config/GlobalVariables";
+import { ApolloProvider, graphql } from "react-apollo";
+import ApolloClient from "apollo-client";
+import { HttpLink } from "apollo-link-http";
+import { InMemoryCache } from "apollo-cache-inmemory";
 
 import { AllLeaguesListQuery } from "./Queries/AllLeaguesListQuery";
 import { AllLeagueColumns } from "./AllLeaguesColumns";
@@ -9,6 +13,13 @@ import { AllLeagueColumns } from "./AllLeaguesColumns";
 //Assests
 import "../Assets/css/AllLeagues.css";
 import Logo from "../Assets/Images/logo-white-with-name.jpg";
+
+const apolloClient = new ApolloClient({
+  link: new HttpLink({
+    uri: GLOBAL_CONFIG.graphQLEndPoint
+  }),
+  cache: new InMemoryCache()
+});
 
 function ListofLeagues({ loading, error, leagues }) {
   if (loading) return <div className="allLeagues">Fetching Leauges...</div>;
@@ -39,7 +50,9 @@ class MainLeagues extends Component {
   render() {
     return (
       <div>
-        <LeagueData />
+        <ApolloProvider client={apolloClient}>
+          <LeagueData />
+        </ApolloProvider>
       </div>
     );
   }

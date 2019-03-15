@@ -25,7 +25,7 @@ const AddUser = () => (
       <div className="userProfile">
         <div className="userform">
           <h5>Set your StaplePuck user handle</h5>
-          {loading && console.log(this.props.auth.accessToken)}
+          {loading && console.log(loading)}
           {error && console.log(error)}
           {data && data.updateUser && alert("Update Success")}
           <Formik

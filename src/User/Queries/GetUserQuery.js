@@ -6,6 +6,7 @@ export const GetProfileQuery = gql`
       id
       name
       email
+      receiveEmails
     }
   }
 `;

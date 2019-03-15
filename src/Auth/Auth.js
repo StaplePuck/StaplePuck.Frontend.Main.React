@@ -23,17 +23,6 @@ export default class Auth {
   });
 
   constructor() {
-    this.apolloClient = new ApolloClient({
-      link: new HttpLink({
-        uri: GLOBAL_CONFIG.graphQLEndPoint,
-        headers: {
-          authorization: this.getAccessToken()
-            ? `Bearer ${this.getAccessToken()}`
-            : null
-        }
-      }),
-      cache: new InMemoryCache()
-    });
     this.userProfile = null;
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
@@ -96,6 +85,7 @@ export default class Auth {
       }),
       cache: new InMemoryCache()
     });
+    console.log(this.apolloClient);
     // navigate to the home route
     history.replace("/user");
   }
