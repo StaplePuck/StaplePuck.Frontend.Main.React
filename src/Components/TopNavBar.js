@@ -24,7 +24,7 @@ class TopNavBar extends Component {
 
             {isAuthenticated() && (
               <li>
-                <Link to="/user">Hello Username</Link>
+                <Link to="/user">My Profile</Link>
               </li>
             )}
 
