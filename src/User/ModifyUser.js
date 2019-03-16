@@ -36,7 +36,6 @@ const AddUser = () => (
             }}
             validationSchema={ProfileShema}
             onSubmit={values => {
-              // log submit status
               updateUser({
                 variables: {
                   user: {

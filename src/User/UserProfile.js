@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { ApolloProvider, Query } from "react-apollo";
 import { GetProfileQuery } from "./Queries/GetUserQuery";
 import ModifyUser from "./ModifyUser";
+import UpdateEmailPref from "./UpdateEmailPref";
 import LoginPage from "../Home/Login";
 
 //Assests
@@ -23,6 +24,7 @@ class UserProfile extends Component {
               {({ loading, error, data }) => {
                 if (loading) return <div>Fetching Profile...</div>;
                 if (error) return <div>Error Fetching Profile...</div>;
+                console.log(data.currentUser);
 
                 //Redirect to the Add User form if no user is returned on login
                 if (!data || !data.currentUser) {
@@ -31,10 +33,9 @@ class UserProfile extends Component {
 
                 return (
                   <div>
-                    Handle created.
+                    <UpdateEmailPref currentuser={data.currentUser} />
                     <br />
-                    TODO: Add list of user's leagues and ability to opt out of
-                    emails.
+                    TODO: Add list of the user's leagues...
                   </div>
                 );
               }}
