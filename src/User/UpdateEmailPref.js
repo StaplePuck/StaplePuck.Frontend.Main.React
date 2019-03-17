@@ -12,7 +12,7 @@ const UpdateEmailPref = props => (
     {(updateUser, { loading, error, data }) => (
       <div className="userProfile">
         <div className="userform">
-          <h5>Set your get your email preferences</h5>
+          <h5>Set your your email preferences</h5>
           {loading && console.log(props)}
           {error && console.log(error)}
           {data && data.updateUser && alert("Email Preferences Set")}
