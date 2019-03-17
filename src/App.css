@@ -9,7 +9,6 @@ body {
 
 .btn-primary {
   background-color: gold;
-  border-color: #fff;
   color: #000;
 }
 
@@ -19,7 +18,6 @@ body {
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
   background-color: #fff;
-  border-color: #fff;
   color: #000;
 }
 

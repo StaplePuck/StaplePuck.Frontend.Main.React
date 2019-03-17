@@ -24,7 +24,6 @@ class UserProfile extends Component {
               {({ loading, error, data }) => {
                 if (loading) return <div>Fetching Profile...</div>;
                 if (error) return <div>Error Fetching Profile...</div>;
-                console.log(data.currentUser);
 
                 //Redirect to the Add User form if no user is returned on login
                 if (!data || !data.currentUser) {

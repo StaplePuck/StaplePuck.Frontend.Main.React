@@ -1,11 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const AllLeagueColumns = [
   {
     Header: "League",
     accessor: "name",
     id: "id",
-    Cell: props => <a href={`/league/${props.original.id}`}> {props.value} </a>,
+    Cell: props => (
+      <Link to={`/league/${props.original.id}`}>{props.value}</Link>
+    ),
     style: { textAlign: "center" },
     headerStyle: {
       fontWeight: "bold",
