@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button } from "react-bootstrap";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import { GLOBAL_CONFIG } from "../App_Config/GlobalVariables";
@@ -7,8 +8,8 @@ import ApolloClient from "apollo-client";
 import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
-import { AllLeaguesListQuery } from "./Queries/AllLeaguesListQuery";
-import { AllLeagueColumns } from "./AllLeaguesColumns";
+import { LeagueTeamListQuery } from "./Queries/LeagueTeamListQuery";
+import { LeagueTeamsColumns } from "./LeagueTeamsColumns";
 
 //Assests
 import "../Assets/css/AllLeagues.css";
@@ -21,41 +22,49 @@ const apolloClient = new ApolloClient({
   cache: new InMemoryCache()
 });
 
-function ListofLeagues({ loading, error, leagues }) {
+function ListofTeams({ loading, error, teams }) {
   if (loading) return <div className="allLeagues">Fetching Leauges...</div>;
   if (error) return <div className="allLeagues">Error Fetching Leauges</div>;
   return (
     <div className="allLeagues">
-      <img className="mainLogo" src={Logo} alt="Logo" />
       <ReactTable
-        data={leagues}
-        columns={AllLeagueColumns}
+        data={teams}
+        columns={LeagueTeamsColumns}
         defaultPageSize={10}
         resizable={false}
-        noDataText="Bloody hell... No leagues!"
+        noDataText="Bloody hell... No teams!"
         className="-striped -highlight allLeaguesTable"
       />
     </div>
   );
 }
 
-const LeagueData = graphql(AllLeaguesListQuery, {
-  props: ({ data: { loading, leagues } }) => ({
+const TeamsData = graphql(LeagueTeamListQuery, {
+  props: ({ data: { loading, teams } }) => ({
     loading,
-    leagues
+    teams
   })
-})(ListofLeagues);
+})(ListofTeams);
 
-class MainLeagues extends Component {
+class LeagueTeams extends Component {
   render() {
+    const { isAuthenticated } = this.props.auth;
+
     return (
-      <div>
+      <div className="allLeagues">
+        <img className="mainLogo" src={Logo} alt="Logo" />
+        <h2>League Name</h2>
+        {isAuthenticated() && (
+          <Button bsStyle="primary" className="btn-margin">
+            Create team
+          </Button>
+        )}
         <ApolloProvider client={apolloClient}>
-          <LeagueData />
+          <TeamsData />
         </ApolloProvider>
       </div>
     );
   }
 }
 
-export default MainLeagues;
+export default LeagueTeams;

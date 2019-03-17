@@ -85,7 +85,6 @@ export default class Auth {
       }),
       cache: new InMemoryCache()
     });
-    console.log(this.apolloClient);
     // navigate to the home route
     history.replace("/user");
   }

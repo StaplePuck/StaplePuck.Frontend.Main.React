@@ -4,11 +4,12 @@ import Auth from "./Auth/Auth";
 import History from "./history";
 import Callback from "./Callback/Callback";
 import TopNavBar from "./Components/TopNavBar";
-import Home from "./Home/AllLeagues";
-import MyLeagues from "./User/MyLeagues";
+import Home from "./Leagues/AllLeagues";
+import MyLeagues from "./Leagues/MyLeagues";
 import UserProfile from "./User/UserProfile";
 import ModifyUser from "./User/ModifyUser";
-import LoginPage from "./Home/Login.js";
+import LoginPage from "./Home/Login";
+import LeaguePage from "./Leagues/LeagueTeams";
 
 const auth = new Auth();
 
@@ -57,6 +58,10 @@ export const makeMainRoutes = () => {
           <Route
             path="/callback"
             render={props => <Callback auth={auth} {...props} />}
+          />
+          <Route
+            path="/league"
+            render={props => <LeaguePage auth={auth} {...props} />}
           />
         </div>
       </Router>

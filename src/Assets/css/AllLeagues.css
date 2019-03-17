@@ -31,9 +31,8 @@ img {
 }
 
 .ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover {
-  background: lightgoldenrodyellow;
+  background: #fff;
   color: #000;
-  cursor: pointer;
 }
 
 .pagination-bottom {

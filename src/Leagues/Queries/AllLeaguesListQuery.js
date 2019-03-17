@@ -11,10 +11,8 @@ export const AllLeaguesListQuery = gql`
         fullName
         sport {
           name
+          id
         }
-      }
-      fantasyTeams {
-        id
       }
     }
   }
