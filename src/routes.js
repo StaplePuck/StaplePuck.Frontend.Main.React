@@ -10,6 +10,7 @@ import UserProfile from "./User/UserProfile";
 import ModifyUser from "./User/ModifyUser";
 import LoginPage from "./Home/Login";
 import LeaguePage from "./Leagues/LeagueTeams";
+import CreateHokeyTeam from "./Hockey/Pages/CreateHockeyTeam";
 
 const auth = new Auth();
 
@@ -62,6 +63,10 @@ export const makeMainRoutes = () => {
           <Route
             path="/league"
             render={props => <LeaguePage auth={auth} {...props} />}
+          />
+          <Route
+            path="/hockey/createteam"
+            render={props => <CreateHokeyTeam auth={auth} {...props} />}
           />
         </div>
       </Router>

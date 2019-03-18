@@ -5,7 +5,7 @@ import { Mutation } from "react-apollo";
 import { AddUserQuery } from "./Queries/AddUserQuery";
 
 //Assests
-import "../Assets/css/UserProfile.css";
+import "../Assets/css/User/UserProfile.css";
 
 const UpdateEmailPref = props => (
   <Mutation mutation={AddUserQuery}>

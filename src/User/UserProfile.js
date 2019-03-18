@@ -6,7 +6,7 @@ import UpdateEmailPref from "./UpdateEmailPref";
 import LoginPage from "../Home/Login";
 
 //Assests
-import "../Assets/css/UserProfile.css";
+import "../Assets/css/User/UserProfile.css";
 import Logo from "../Assets/Images/logo-white-with-name.jpg";
 
 class UserProfile extends Component {

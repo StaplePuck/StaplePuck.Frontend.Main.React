@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import { GLOBAL_CONFIG } from "../App_Config/GlobalVariables";
@@ -12,7 +13,7 @@ import { LeagueTeamListQuery } from "./Queries/LeagueTeamListQuery";
 import { LeagueTeamsColumns } from "./LeagueTeamsColumns";
 
 //Assests
-import "../Assets/css/AllLeagues.css";
+import "../Assets/css/Leagues/AllLeagues.css";
 import Logo from "../Assets/Images/logo-white-with-name.jpg";
 
 const apolloClient = new ApolloClient({
@@ -56,7 +57,9 @@ class LeagueTeams extends Component {
         <h2>League Name</h2>
         {isAuthenticated() && (
           <Button bsStyle="primary" className="btn-margin">
-            Create team
+            <Link className="createTeamBtn" to={`/hockey/createteam/`}>
+              Create Team
+            </Link>
           </Button>
         )}
         <ApolloProvider client={apolloClient}>

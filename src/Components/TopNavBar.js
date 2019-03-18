@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 //Assests
-import "../Assets/css/NavBar.css";
+import "../Assets/css/Components/NavBar.css";
 
 class TopNavBar extends Component {
   render() {

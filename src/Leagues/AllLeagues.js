@@ -11,7 +11,7 @@ import { AllLeaguesListQuery } from "../Leagues/Queries/AllLeaguesListQuery";
 import { AllLeagueColumns } from "./AllLeaguesColumns";
 
 //Assests
-import "../Assets/css/AllLeagues.css";
+import "../Assets/css/Leagues/AllLeagues.css";
 import Logo from "../Assets/Images/logo-white-with-name.jpg";
 
 const apolloClient = new ApolloClient({
