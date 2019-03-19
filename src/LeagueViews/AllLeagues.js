@@ -7,7 +7,7 @@ import ApolloClient from "apollo-client";
 import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
-import { AllLeaguesListQuery } from "../Leagues/Queries/AllLeaguesListQuery";
+import { AllLeaguesListQuery } from "../LeagueViews/Queries/AllLeaguesListQuery";
 import { AllLeagueColumns } from "./AllLeaguesColumns";
 
 //Assests

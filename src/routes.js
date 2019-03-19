@@ -4,12 +4,12 @@ import Auth from "./Auth/Auth";
 import History from "./history";
 import Callback from "./Callback/Callback";
 import TopNavBar from "./Components/TopNavBar";
-import Home from "./Leagues/AllLeagues";
-import MyLeagues from "./Leagues/MyLeagues";
+import Home from "./LeagueViews/AllLeagues";
+import MyLeagues from "./LeagueViews/MyLeagues";
 import UserProfile from "./User/UserProfile";
 import ModifyUser from "./User/ModifyUser";
 import LoginPage from "./Home/Login";
-import LeaguePage from "./Leagues/LeagueTeams";
+import LeaguePage from "./LeagueViews/LeagueTeams";
 import CreateHokeyTeam from "./Hockey/Pages/CreateHockeyTeam";
 
 const auth = new Auth();
