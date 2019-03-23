@@ -32,9 +32,8 @@ img {
 }
 
 .ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover {
-  background: lightgoldenrodyellow;
+  background: #fff;
   color: #000;
-  cursor: pointer;
 }
 
 .pagination-bottom {
@@ -43,4 +42,18 @@ img {
 
 .ReactTable .-pagination .-center {
   color: #000;
+}
+
+.createTeamBtn {
+  padding: 0 !important;
+  color: #000;
+}
+
+.createTeamBtn:hover,
+.createTeamBtn:focus,
+.createTeamBtn:active,
+.createTeamBtn.active {
+  background-color: #30303c;
+  color: #fff;
+  text-decoration: none;
 }

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import "../Assets/css/NavBar.css";
+
+//Assests
+import "../Assets/css/Components/NavBar.css";
 
 class TopNavBar extends Component {
   render() {
@@ -19,12 +21,14 @@ class TopNavBar extends Component {
             <li>
               <Link to="/myleagues">My Leagues</Link>
             </li>
+
+            {isAuthenticated() && (
+              <li>
+                <Link to="/user">My Profile</Link>
+              </li>
+            )}
+
             <li>
-              {isAuthenticated() && (
-                <li>
-                  <Link to="/user">Hello Username</Link>
-                </li>
-              )}
               <Button
                 bsStyle="primary"
                 className="btn-margin pull-right"

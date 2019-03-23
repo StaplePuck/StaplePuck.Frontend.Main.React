@@ -1,8 +1,15 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
 export const AllLeagueColumns = [
   {
     Header: "League",
     accessor: "name",
-    style: { textAlign: "center", textDecoration: "underline" },
+    id: "id",
+    Cell: props => (
+      <Link to={`/league/${props.original.id}`}>{props.value}</Link>
+    ),
+    style: { textAlign: "center" },
     headerStyle: {
       fontWeight: "bold",
       backgroundColor: "gold",
@@ -12,6 +19,7 @@ export const AllLeagueColumns = [
   {
     Header: "Sport",
     accessor: "season.sport.name",
+    //Cell: e => <a href={`/sport/${e.id}`}> {e.value} </a>,
     style: { textAlign: "center" },
     headerStyle: {
       fontWeight: "bold",

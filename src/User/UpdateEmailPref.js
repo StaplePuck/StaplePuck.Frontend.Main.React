@@ -9,39 +9,33 @@ import { AddUserQuery } from "./Queries/AddUserQuery";
 import "../Assets/css/User/UserProfile.css";
 
 const ProfileShema = Yup.object().shape({
-  handle: Yup.string()
-    .min(5, "Must be 5 characters or longer")
-    .max(20, "Must be 20 characters or less")
-    .required("Handle is Required"),
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is Required"),
   receiveEmails: Yup.boolean()
 });
 
-const AddUser = () => (
+const UpdateEmailPref = props => (
   <Mutation mutation={AddUserQuery}>
     {(updateUser, { loading, error, data }) => (
       <div className="userProfile">
         <div className="userform">
-          <h5>Set your StaplePuck user handle</h5>
-          {loading && console.log(loading)}
-          {error && console.log(error)}
-          {data && data.updateUser && alert("Update Success")}
+          <h5>Set your your email preferences</h5>
+          {loading && console.log(props.currentuser.receiveEmails)}
+          {error && console.log(error.message)}
+          {data && data.updateUser && alert("Email Preferences Set")}
           <Formik
             initialValues={{
-              handle: "",
-              email: "",
-              receiveEmails: false
+              receiveEmails: props.currentuser.receiveEmails,
+              email: props.currentuser.email
             }}
             validationSchema={ProfileShema}
             onSubmit={values => {
               updateUser({
                 variables: {
                   user: {
-                    email: values.email,
-                    name: values.handle,
-                    receiveEmails: values.receiveEmails
+                    receiveEmails: values.receiveEmails,
+                    email: values.email
                   }
                 }
               });
@@ -55,20 +49,6 @@ const AddUser = () => (
               handleSubmit
             }) => (
               <form onSubmit={handleSubmit}>
-                <div className="userFormGroup">
-                  <label>Handle:</label>
-                  <input
-                    type="Text"
-                    name="handle"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.handle}
-                  />
-                  {touched.handle && errors && errors.handle && (
-                    <div className="userFormErrorBlock">{errors.handle}</div>
-                  )}
-                </div>
-
                 <div className="userFormGroup">
                   <label>Email:</label>
                   <input
@@ -94,11 +74,6 @@ const AddUser = () => (
                 <div className="user-submit-block">
                   <Button type="submit">Submit</Button>
                 </div>
-                <div>
-                  Your hanlde will be associated with each team you create.
-                  <br />
-                  Your team names will be set when you create a team.
-                </div>
               </form>
             )}
           />
@@ -108,4 +83,4 @@ const AddUser = () => (
   </Mutation>
 );
 
-export default AddUser;
+export default UpdateEmailPref;
