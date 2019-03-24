@@ -87,6 +87,7 @@ const AddUser = () => (
                   <input
                     type="Checkbox"
                     name="receiveEmails"
+                    onChange={handleChange}
                     value={values.receiveEmails}
                   />{" "}
                 </div>

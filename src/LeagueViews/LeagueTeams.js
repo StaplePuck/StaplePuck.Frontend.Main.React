@@ -50,14 +50,14 @@ const TeamsData = graphql(LeagueTeamListQuery, {
 class LeagueTeams extends Component {
   render() {
     const { isAuthenticated } = this.props.auth;
-
+    let id = this.props.match.params.id;
     return (
       <div className="allLeagues">
         <img className="mainLogo" src={Logo} alt="Logo" />
         <h2>League Name</h2>
         {isAuthenticated() && (
           <Button bsStyle="primary" className="btn-margin">
-            <Link className="createTeamBtn" to={`/hockey/createteam/`}>
+            <Link className="createTeamBtn" to={`/hockey/createteam/${id}`}>
               Create Team
             </Link>
           </Button>

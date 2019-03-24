@@ -61,11 +61,12 @@ export const makeMainRoutes = () => {
             render={props => <Callback auth={auth} {...props} />}
           />
           <Route
-            path="/league"
+            exact
+            path="/league/:id"
             render={props => <LeaguePage auth={auth} {...props} />}
           />
           <Route
-            path="/hockey/createteam"
+            path="/hockey/createteam/:id"
             render={props => <CreateHokeyTeam auth={auth} {...props} />}
           />
         </div>

@@ -12,7 +12,7 @@ const ProfileShema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is Required"),
-  receiveEmails: Yup.boolean()
+  receiveEmails: Yup.boolean
 });
 
 const UpdateEmailPref = props => (
@@ -21,8 +21,8 @@ const UpdateEmailPref = props => (
       <div className="userProfile">
         <div className="userform">
           <h5>Set your your email preferences</h5>
-          {loading && console.log(props.currentuser.receiveEmails)}
-          {error && console.log(error.message)}
+          {loading && console.log(loading.valueOf())}
+          {error && console.log(error.graphQLErrors)}
           {data && data.updateUser && alert("Email Preferences Set")}
           <Formik
             initialValues={{
@@ -67,11 +67,12 @@ const UpdateEmailPref = props => (
                   <input
                     type="Checkbox"
                     name="receiveEmails"
+                    onChange={handleChange}
                     value={values.receiveEmails}
                   />{" "}
                 </div>
 
-                <div className="user-submit-block">
+                <div>
                   <Button type="submit">Submit</Button>
                 </div>
               </form>
