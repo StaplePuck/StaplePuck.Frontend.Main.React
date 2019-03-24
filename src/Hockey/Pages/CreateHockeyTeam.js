@@ -13,10 +13,10 @@ import "../../Assets/css/User/UserProfile.css";
 import Logo from "../../Assets/Images/logo-white-with-name.jpg";
 
 const ProfileShema = Yup.object().shape({
-  teamname: Yup.string()
+  name: Yup.string()
     .min(5, "Must be 5 characters or longer")
     .max(20, "Must be 20 characters or less")
-    .required("Name is Required")
+    .required("Team Name is Required")
 });
 
 class Craeteteam extends Component {
@@ -70,7 +70,8 @@ class Craeteteam extends Component {
                                 alert("Team Created")}
                               <Formik
                                 initialValues={{
-                                  name: ""
+                                  name: "",
+                                  leagueId: this.props.match.params.id
                                 }}
                                 validationSchema={ProfileShema}
                                 onSubmit={values => {
@@ -78,7 +79,7 @@ class Craeteteam extends Component {
                                     variables: {
                                       fantasyTeam: {
                                         name: values.name,
-                                        id: { leagueid }
+                                        leagueId: this.props.match.params.id
                                       }
                                     }
                                   });
@@ -99,13 +100,13 @@ class Craeteteam extends Component {
                                         name="name"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        value={values.team}
+                                        value={values.name}
                                       />
-                                      {touched.handle &&
+                                      {touched.name &&
                                         errors &&
-                                        errors.handle && (
+                                        errors.name && (
                                           <div className="userFormErrorBlock">
-                                            {errors.team}
+                                            {errors.name}
                                           </div>
                                         )}
                                     </div>
