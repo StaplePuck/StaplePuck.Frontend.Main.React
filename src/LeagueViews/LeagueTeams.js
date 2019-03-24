@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import { GLOBAL_CONFIG } from "../App_Config/GlobalVariables";
-import { ApolloProvider, graphql } from "react-apollo";
+import { ApolloProvider, Query } from "react-apollo";
 import ApolloClient from "apollo-client";
 import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
-import { LeagueTeamListQuery } from "./Queries/LeagueTeamListQuery";
+import { QueryGetLeagueTeams } from "./Queries/LeagueTeamListQuery";
 import { LeagueTeamsColumns } from "./LeagueTeamsColumns";
 
 //Assests
@@ -23,49 +23,59 @@ const apolloClient = new ApolloClient({
   cache: new InMemoryCache()
 });
 
-function ListofTeams({ loading, error, teams }) {
-  if (loading) return <div className="allLeagues">Fetching Leauges...</div>;
-  if (error) return <div className="allLeagues">Error Fetching Leauges</div>;
-  return (
-    <div className="allLeagues">
-      <ReactTable
-        data={teams}
-        columns={LeagueTeamsColumns}
-        defaultPageSize={10}
-        resizable={false}
-        noDataText="Bloody hell... No teams!"
-        className="-striped -highlight allLeaguesTable"
-      />
-    </div>
-  );
-}
-
-const TeamsData = graphql(LeagueTeamListQuery, {
-  props: ({ data: { loading, teams } }) => ({
-    loading,
-    teams
-  })
-})(ListofTeams);
-
 class LeagueTeams extends Component {
   render() {
     const { isAuthenticated } = this.props.auth;
-    let id = this.props.match.params.id;
+    let leagueid = {
+      leagueid: this.props.match.params.id
+    };
+
     return (
-      <div className="allLeagues">
-        <img className="mainLogo" src={Logo} alt="Logo" />
-        <h2>League Name</h2>
-        {isAuthenticated() && (
-          <Button bsStyle="primary" className="btn-margin">
-            <Link className="createTeamBtn" to={`/hockey/createteam/${id}`}>
-              Create Team
-            </Link>
-          </Button>
-        )}
-        <ApolloProvider client={apolloClient}>
-          <TeamsData />
-        </ApolloProvider>
-      </div>
+      <ApolloProvider client={apolloClient}>
+        <div className="userProfile">
+          <img className="mainLogo" src={Logo} alt="Logo" />
+          <Query variables={leagueid} query={QueryGetLeagueTeams}>
+            {({ loading, error, data }) => {
+              if (loading) return <div>Loading League Data...</div>;
+              if (error) return <div>Error Loading League Data...</div>;
+
+              if (!data || !data.leagues) {
+                return <div>No league data was returned</div>;
+              }
+              return (
+                <div>
+                  {data.leagues.map(league => (
+                    <div key={league.id}>
+                      {console.log(league.fantasyTeams)}
+                      <h2 key={league.name}>{league.name}</h2>
+                      {isAuthenticated() && (
+                        <Button bsStyle="primary" className="btn-margin">
+                          <Link
+                            className="createTeamBtn"
+                            to={`/hockey/createteam/${
+                              this.props.match.params.id
+                            }`}
+                          >
+                            Create Team
+                          </Link>
+                        </Button>
+                      )}
+                      <ReactTable
+                        data={league.fantasyTeams}
+                        columns={LeagueTeamsColumns}
+                        defaultPageSize={10}
+                        resizable={false}
+                        noDataText="Bloody hell... No teams!"
+                        className="-striped -highlight allLeaguesTable"
+                      />
+                    </div>
+                  ))}
+                </div>
+              );
+            }}
+          </Query>
+        </div>
+      </ApolloProvider>
     );
   }
 }

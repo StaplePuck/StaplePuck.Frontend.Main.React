@@ -19,7 +19,7 @@ const ProfileShema = Yup.object().shape({
     .required("Team Name is Required")
 });
 
-class Craeteteam extends Component {
+class Createteam extends Component {
   render() {
     let leagueid = {
       leagueid: this.props.match.params.id
@@ -35,11 +35,9 @@ class Craeteteam extends Component {
 
             <Query variables={leagueid} query={QueryGetLeagueTeams}>
               {({ loading, error, data }) => {
-                if (loading) return <div>Loading Hetland's NHL Data...</div>;
-                if (error)
-                  return <div>Error Loading Hetland's NHL Data...</div>;
+                if (loading) return <div>Loading League Data...</div>;
+                if (error) return <div>Error Loading League Data...</div>;
 
-                //
                 if (!data || !data.leagues) {
                   return <div>No league data was returned</div>;
                 }
@@ -133,4 +131,4 @@ class Craeteteam extends Component {
   }
 }
 
-export default Craeteteam;
+export default Createteam;
