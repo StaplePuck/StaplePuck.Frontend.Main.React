@@ -4,8 +4,8 @@ import { ApolloProvider, Query } from "react-apollo";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Mutation } from "react-apollo";
-import { GetTeamsAndPlayers } from "../Queries/GetNHLTeams";
-import { CreateTeam } from "../Queries/CreateTeam";
+import { QueryGetLeagueTeams } from "../Queries/GetLeagueTeams";
+import { QueryCreateTeam } from "../Queries/CreateTeam";
 import LoginPage from "../../Home/Login";
 
 //Assests
@@ -33,7 +33,7 @@ class Craeteteam extends Component {
           <div className="userProfile">
             <img className="mainLogo" src={Logo} alt="Logo" />
 
-            <Query variables={leagueid} query={GetTeamsAndPlayers}>
+            <Query variables={leagueid} query={QueryGetLeagueTeams}>
               {({ loading, error, data }) => {
                 if (loading) return <div>Loading Hetland's NHL Data...</div>;
                 if (error)
@@ -59,7 +59,7 @@ class Craeteteam extends Component {
                     ))}
 
                     <div>
-                      <Mutation mutation={CreateTeam}>
+                      <Mutation mutation={QueryCreateTeam}>
                         {(createFantasyTeam, { loading, error, data }) => (
                           <div className="userProfile">
                             <div className="userform">
