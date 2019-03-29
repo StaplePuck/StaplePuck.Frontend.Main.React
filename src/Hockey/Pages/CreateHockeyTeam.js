@@ -20,6 +20,15 @@ const ProfileShema = Yup.object().shape({
 });
 
 class Createteam extends Component {
+  componentWillUpdate(teamid) {
+    this.onCreateSuccess(teamid);
+  }
+
+  onCreateSuccess = teamid => {
+    // navigate to the set lineup page
+    this.props.history.replace(`/hockey/setlineup/${teamid}`);
+  };
+
   render() {
     let leagueid = {
       leagueid: this.props.match.params.id
@@ -48,12 +57,10 @@ class Createteam extends Component {
                         Create a team for the {league.name}
                       </h2>
                       /* <select name="team">
-                      
-                        <option key={league.id} value={dog.breed}>
-                          {league.breed}
-                        </option>
-                      
-                    </select> */
+                          <option key={league.id} value={dog.breed}>
+                            {league.breed}
+                          </option>
+                      </select> */
                     ))}
 
                     <div>
@@ -61,11 +68,11 @@ class Createteam extends Component {
                         {(createFantasyTeam, { loading, error, data }) => (
                           <div className="userProfile">
                             <div className="userform">
-                              {loading && console.log(loading)}
+                              {loading && <div>Saving...</div>}
                               {error && console.log(error)}
                               {data &&
                                 data.createFantasyTeam &&
-                                alert("Team Created")}
+                                this.onCreateSuccess(data.createFantasyTeam.id)}
                               <Formik
                                 initialValues={{
                                   name: "",

@@ -46,7 +46,6 @@ class LeagueTeams extends Component {
                 <div>
                   {data.leagues.map(league => (
                     <div key={league.id}>
-                      {console.log(league.fantasyTeams)}
                       <h2 key={league.name}>{league.name}</h2>
                       {isAuthenticated() && (
                         <Button bsStyle="primary" className="btn-margin">
@@ -56,7 +55,7 @@ class LeagueTeams extends Component {
                               this.props.match.params.id
                             }`}
                           >
-                            Create Team
+                            Join League
                           </Link>
                         </Button>
                       )}

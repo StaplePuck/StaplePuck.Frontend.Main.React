@@ -11,6 +11,7 @@ import ModifyUser from "./User/ModifyUser";
 import LoginPage from "./Home/Login";
 import LeaguePage from "./LeagueViews/LeagueTeams";
 import CreateHockeyTeam from "./Hockey/Pages/CreateHockeyTeam";
+import SetHockeyLineup from "./Hockey/Pages/SetHockeyLineup";
 
 const auth = new Auth();
 
@@ -68,6 +69,11 @@ export const makeMainRoutes = () => {
           <Route
             path="/hockey/createteam/:id"
             render={props => <CreateHockeyTeam auth={auth} {...props} />}
+          />
+          <Route
+            exact
+            path="/hockey/setlineup/:id"
+            render={props => <SetHockeyLineup auth={auth} {...props} />}
           />
         </div>
       </Router>
