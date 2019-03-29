@@ -44,96 +44,84 @@ class SetHockeyLineup extends Component {
                 }
                 return (
                   <div>
-                    <div>
-                      {data.fantasyTeams.gM.map(teamgm => (
-                        <h2 key={teamgm.externalId}>
-                          Stuff: {teamgm.externalId}
-                        </h2>
-                      ))}
-                    </div>
-                    {/* <div>
-                      {data.fantasyTeams.league.season.map(LeagueSeason => (
-                        <h2 key={LeagueSeason.id}>
-                          Set your lineup for {LeagueSeason.name}
-                        </h2>
-                      ))}
-                    </div> */}
+                    {data.fantasyTeams.map(Fteams => (
+                      <Mutation mutation={MutationSetLineup}>
+                        {(updateFantasyTeam, { saving, error, data }) => (
+                          <div className="userProfile">
+                            <div className="userform">
+                              {saving && <div>Saving...</div>}
+                              {error && (
+                                <div>Error Saving... {console.log(error)}</div>
+                              )}
+                              {data &&
+                                data.updateFantasyTeam &&
+                                alert("Team Saved")}
+                              <Formik
+                                // initialValues={{
+                                //   name: "",
+                                // }}
+                                validationSchema={ProfileShema}
+                                onSubmit={values => {
+                                  updateFantasyTeam({
+                                    variables: {
+                                      fantasyTeam: {
+                                        id: this.props.match.params.id
+                                      }
+                                    }
+                                  });
+                                }}
+                                render={({
+                                  values,
+                                  errors,
+                                  touched,
+                                  handleChange,
+                                  handleBlur,
+                                  handleSubmit
+                                }) => (
+                                  <form onSubmit={handleSubmit}>
+                                    <h3 key={Fteams.id}>
+                                      Team Name: {Fteams.name}
+                                    </h3>
+                                    <div>
+                                      {Fteams.league.season.teamSeasons.map(
+                                        NHLTeam => (
+                                          <div className="userFormGroup">
+                                            <label
+                                              key={NHLTeam.team.locationName}
+                                            >
+                                              {NHLTeam.team.fullName}
+                                            </label>
+                                            <select name="player">
+                                              <option value="">
+                                                Select...
+                                              </option>
+                                              {NHLTeam.playerSeasons.map(
+                                                Players => (
+                                                  <option
+                                                    key={Players.player.id}
+                                                    value={Players.player.id}
+                                                  >
+                                                    {Players.player.fullName}
+                                                  </option>
+                                                )
+                                              )}
+                                            </select>
+                                          </div>
+                                        )
+                                      )}
+                                    </div>
+                                    <div className="user-submit-block">
+                                      <Button type="submit">Save</Button>
+                                    </div>
+                                  </form>
+                                )}
+                              />
+                            </div>
+                          </div>
+                        )}
+                      </Mutation>
+                    ))}
                   </div>
-
-                  // <Mutation mutation={MutationSetLineup}>
-                  //   {(updateFantasyTeam, { saving, error, data }) => (
-                  //     <div className="userProfile">
-                  //       <div className="userform">
-                  //         {saving && <div>Saving...</div>}
-                  //         {error && (
-                  //           <div>Error Saving... {console.log(error)}</div>
-                  //         )}
-                  //         {data &&
-                  //           data.updateFantasyTeam &&
-                  //           alert("Team Saved")}
-                  //         <Formik
-                  //           // initialValues={{
-                  //           //   name: "",
-                  //           // }}
-                  //           validationSchema={ProfileShema}
-                  //           onSubmit={values => {
-                  //             updateFantasyTeam({
-                  //               variables: {
-                  //                 fantasyTeam: {
-                  //                   id: this.props.match.params.id
-                  //                 }
-                  //               }
-                  //             });
-                  //           }}
-                  //           render={({
-                  //             values,
-                  //             errors,
-                  //             touched,
-                  //             handleChange,
-                  //             handleBlur,
-                  //             handleSubmit
-                  //           }) => (
-                  //             <form onSubmit={handleSubmit}>
-                  //               {data.fantasyTeams.map(FantastyTeam => (
-                  //                 <h2 key={FantastyTeam.name}>
-                  //                   Set your lineup for {FantastyTeam.name}
-                  //                 </h2>
-                  //               ))}
-
-                  //               {data.fantasyTeams.league.season.teamSeasons.team.map(
-                  //                 NHLTeam => (
-                  //                   <div
-                  //                     className="userFormGroup"
-                  //                     key={NHLTeam.id}
-                  //                   >
-                  //                     <label>{NHLTeam.fullName}</label>
-                  //                     <select name="team">
-                  //                       <option
-                  //                         key={NHLTeam.playerSeasons.player.id}
-                  //                         value={
-                  //                           NHLTeam.playerSeasons.player.id
-                  //                         }
-                  //                       >
-                  //                         {
-                  //                           NHLTeam.playerSeasons.player
-                  //                             .fullName
-                  //                         }
-                  //                       </option>
-                  //                     </select>
-                  //                   </div>
-                  //                 )
-                  //               )}
-
-                  //               <div className="user-submit-block">
-                  //                 <Button type="submit">Save</Button>
-                  //               </div>
-                  //             </form>
-                  //           )}
-                  //         />
-                  //       </div>
-                  //     </div>
-                  //   )}
-                  // </Mutation>
                 );
               }}
             </Query>
