@@ -13,12 +13,9 @@ export const QueryGetNHLData = gql`
         season {
           id
           fullName
-          sport {
-            name
-            id
-          }
           teamSeasons {
             team {
+              locationName
               fullName
               id
             }
