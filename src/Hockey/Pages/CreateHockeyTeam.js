@@ -24,9 +24,11 @@ class Createteam extends Component {
     this.onCreateSuccess(teamid);
   }
 
-  onCreateSuccess = teamid => {
+  onCreateSuccess = data => {
     // navigate to the set lineup page
-    this.props.history.replace(`/hockey/setlineup/${teamid}`);
+    this.props.history.replace(
+      `/hockey/setlineup/${data.createFantasyTeam.id}`
+    );
   };
 
   render() {
@@ -56,23 +58,26 @@ class Createteam extends Component {
                       <h2 key={league.name}>
                         Create a team for the {league.name}
                       </h2>
-                      /* <select name="team">
-                          <option key={league.id} value={dog.breed}>
-                            {league.breed}
-                          </option>
-                      </select> */
                     ))}
 
                     <div>
-                      <Mutation mutation={QueryCreateTeam}>
-                        {(createFantasyTeam, { loading, error, data }) => (
+                      <Mutation
+                        mutation={QueryCreateTeam}
+                        onCompleted={data => {
+                          this.onCreateSuccess(data);
+                        }}
+                      >
+                        {(createFantasyTeam, { saving, error }) => (
                           <div className="userProfile">
                             <div className="userform">
-                              {loading && <div>Saving...</div>}
-                              {error && console.log(error)}
-                              {data &&
-                                data.createFantasyTeam &&
-                                this.onCreateSuccess(data.createFantasyTeam.id)}
+                              {saving && <div>Saving...</div>}
+                              {error && (
+                                <div>
+                                  Error saving your team...
+                                  <br />
+                                  {error.message}
+                                </div>
+                              )}
                               <Formik
                                 initialValues={{
                                   name: "",
