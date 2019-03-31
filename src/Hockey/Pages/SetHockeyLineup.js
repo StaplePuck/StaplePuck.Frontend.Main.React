@@ -45,81 +45,89 @@ class SetHockeyLineup extends Component {
                 return (
                   <div>
                     {data.fantasyTeams.map(Fteams => (
-                      <Mutation mutation={MutationSetLineup} key={Fteams.id}>
-                        {(updateFantasyTeam, { saving, error, data }) => (
-                          <div className="userProfile">
-                            <div className="userform">
-                              {saving && <div>Saving...</div>}
-                              {error && (
-                                <div>Error Saving... {console.log(error)}</div>
-                              )}
-                              {data &&
-                                data.updateFantasyTeam &&
-                                alert("Team Saved")}
-                              <Formik
-                                // initialValues={{
-                                //   name: "",
-                                // }}
-                                onSubmit={values => {
-                                  var fantasyTeamPlayers = [];
-                                  values.player.forEach(element => {
-                                    if ((typeof(element) !== 'undefined') && (element !== null)) {
-                                      fantasyTeamPlayers.push({"playerId": element});
-                                    }
-                                  });
-                                  
-                                  updateFantasyTeam({
-                                    variables: {
-                                      fantasyTeamUpdate: {
-                                        id: Fteams.id,
-                                        "fantasyTeamPlayers": fantasyTeamPlayers
-                                      }
-                                    }
-                                  });
-                                }}
-                                render={formProps => {
-                                  return(
-                                  <Form>
-                                    <h3>
-                                      Team Name: {Fteams.name}
-                                    </h3>
-                                    <div>
-                                     {Fteams.league.season.teamSeasons.map(
-                                        NHLTeam => (
-                                          <div className="userFormGroup" key={NHLTeam.team.id}>
-                                            <label>
-                                              {NHLTeam.team.fullName}
-                                            </label>
-                                            <Field 
-                                              name={`player.${NHLTeam.team.id}`} 
-                                              component="select" 
-                                              placeholder="Select...">
+                      this.props.auth.tokenSub === Fteams.gM.externalId ? (
+                        <div>
+                          <Mutation mutation={MutationSetLineup} key={Fteams.id}>
+                            {(updateFantasyTeam, { saving, error, data }) => (
+                              <div className="userProfile">
+                                <div className="userform">
+                                  {saving && <div>Saving...</div>}
+                                  {error && (
+                                    <div>Error Saving... {console.log(error)}</div>
+                                  )}
+                                  {data &&
+                                    data.updateFantasyTeam &&
+                                    alert("Team Saved")}
+                                  <Formik
+                                    // initialValues={{
+                                    //   name: "",
+                                    // }}
+                                    onSubmit={values => {
+                                      var fantasyTeamPlayers = [];
+                                      values.player.forEach(element => {
+                                        if ((typeof(element) !== 'undefined') && (element !== null)) {
+                                          fantasyTeamPlayers.push({"playerId": element});
+                                        }
+                                      });
+                                      
+                                      updateFantasyTeam({
+                                        variables: {
+                                          fantasyTeamUpdate: {
+                                            id: Fteams.id,
+                                            "fantasyTeamPlayers": fantasyTeamPlayers
+                                          }
+                                        }
+                                      });
+                                    }}
+                                    render={formProps => {
+                                      return(
+                                      <Form>
+                                        <h3>
+                                          Team Name: {Fteams.name}
+                                        </h3>
+                                        <div>
+                                        {Fteams.league.season.teamSeasons.map(
+                                            NHLTeam => (
+                                              <div className="userFormGroup" key={NHLTeam.team.id}>
+                                                <label>
+                                                  {NHLTeam.team.fullName}
+                                                </label>
+                                                <Field 
+                                                  name={`player.${NHLTeam.team.id}`} 
+                                                  component="select" 
+                                                  placeholder="Select...">
 
-                                              {NHLTeam.playerSeasons.map(
-                                                Players => (
-                                                  <option
-                                                    key={Players.player.id}
-                                                    value={Players.player.id}
-                                                  >
-                                                    {Players.player.fullName} - {Players.positionType.shortName}
-                                                  </option>
-                                                )
-                                              )}
-                                            </Field>
-                                          </div>
-                                        )
-                                      )}
-                                    </div>
-                                    <div className="user-submit-block">
-                                      <Button type="submit">Save</Button>
-                                    </div>
-                                  </Form>
-                                )}}
-                              />
-                            </div>
-                          </div>
-                        )}
-                      </Mutation>
+                                                  {NHLTeam.playerSeasons.map(
+                                                    Players => (
+                                                      <option
+                                                        key={Players.player.id}
+                                                        value={Players.player.id}
+                                                      >
+                                                        {Players.player.fullName} - {Players.positionType.shortName}
+                                                      </option>
+                                                    )
+                                                  )}
+                                                </Field>
+                                              </div>
+                                            )
+                                          )}
+                                        </div>
+                                        <div className="user-submit-block">
+                                          <Button type="submit">Save</Button>
+                                        </div>
+                                      </Form>
+                                    )}}
+                                  />
+                                </div>
+                              </div>
+                            )}
+                          </Mutation>
+                      </div>
+                      ) : (
+                          <span>
+                            This isn't your team. Stop trying to cheat, yo!
+                          </span>
+                      )
                     ))}
                   </div>
                 );

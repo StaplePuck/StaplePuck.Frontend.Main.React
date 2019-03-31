@@ -5,9 +5,13 @@ export const QueryGetLeagueTeams = gql`
     leagues(id: $leagueid) {
       id
       name
+      isLocked
       fantasyTeams {
         name
         id
+        gM {
+          externalId
+        }
       }
     }
   }
