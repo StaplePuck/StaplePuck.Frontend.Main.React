@@ -53,7 +53,7 @@ class LeagueTeams extends Component {
       }
       // {
       //   Header: "Score",
-      //   accessor: "name",
+      //   accessor: "teamScore",
       //   style: { textAlign: "center" },
       //   headerStyle: {
       //     fontWeight: "bold",
@@ -80,8 +80,11 @@ class LeagueTeams extends Component {
                   {data.leagues.map(league => (
                     <div key={league.id}>
                       <h2 key={league.name}>{league.name}</h2>
-                      {isAuthenticated() &&
-                        (league.isLocked === false && (
+
+                      {/* Determine if we can show the Join Leage button */}
+                      {isAuthenticated() && // The user has to be logged in
+                      league.isLocked === false && // The league can't be locked
+                      league.fantasyTeams.length === 0 && ( // There are no fantasy teams created at all
                           <Button bsStyle="primary" className="btn-margin">
                             <Link
                               className="createTeamBtn"
@@ -92,7 +95,25 @@ class LeagueTeams extends Component {
                               Join League
                             </Link>
                           </Button>
-                        ))}
+                        )}
+
+                      {isAuthenticated() && // The user has to be logged in
+                      league.isLocked !== false && // The league can't be locked
+                        league.fantasyTeams.some(
+                          val =>
+                            val.gM.externalId !== this.props.auth.tokenSub && ( // The user has not created a fantasy team yet
+                              <Button bsStyle="primary" className="btn-margin">
+                                <Link
+                                  className="createTeamBtn"
+                                  to={`/hockey/createteam/${
+                                    this.props.match.params.id
+                                  }`}
+                                >
+                                  Join League
+                                </Link>
+                              </Button>
+                            )
+                        )}
                       <ReactTable
                         data={league.fantasyTeams}
                         columns={LeagueTeamsColumns}
