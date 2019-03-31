@@ -47,18 +47,19 @@ class LeagueTeams extends Component {
                   {data.leagues.map(league => (
                     <div key={league.id}>
                       <h2 key={league.name}>{league.name}</h2>
-                      {isAuthenticated() && (
-                        <Button bsStyle="primary" className="btn-margin">
-                          <Link
-                            className="createTeamBtn"
-                            to={`/hockey/createteam/${
-                              this.props.match.params.id
-                            }`}
-                          >
-                            Join League
-                          </Link>
-                        </Button>
-                      )}
+                      {isAuthenticated() &&
+                        (league.isLocked == false && (
+                          <Button bsStyle="primary" className="btn-margin">
+                            <Link
+                              className="createTeamBtn"
+                              to={`/hockey/createteam/${
+                                this.props.match.params.id
+                              }`}
+                            >
+                              Join League
+                            </Link>
+                          </Button>
+                        ))}
                       <ReactTable
                         data={league.fantasyTeams}
                         columns={LeagueTeamsColumns}
