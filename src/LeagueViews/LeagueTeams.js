@@ -10,7 +10,7 @@ import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
 import { QueryGetLeagueTeams } from "./Queries/LeagueTeamListQuery";
-import { LeagueTeamsColumns } from "./LeagueTeamsColumns";
+//import { LeagueTeamsColumns } from "./LeagueTeamsColumns";
 
 //Assests
 import "../Assets/css/Leagues/AllLeagues.css";
@@ -30,6 +30,39 @@ class LeagueTeams extends Component {
       leagueid: this.props.match.params.id
     };
 
+    // Had to move the columns to the class in order to access the auth token out of state
+    const LeagueTeamsColumns = [
+      {
+        Header: "Team",
+        accessor: "name",
+        id: "id",
+        Cell: props =>
+          this.props.auth.tokenSub === props.original.gM.externalId ? (
+            <Link to={`../hockey/setlineup/${props.original.id}`}>
+              {props.value}
+            </Link>
+          ) : (
+            <span>{props.value}</span>
+          ),
+        style: { textAlign: "center" },
+        headerStyle: {
+          fontWeight: "bold",
+          backgroundColor: "gold",
+          color: "#30303c"
+        }
+      }
+      // {
+      //   Header: "Score",
+      //   accessor: "name",
+      //   style: { textAlign: "center" },
+      //   headerStyle: {
+      //     fontWeight: "bold",
+      //     backgroundColor: "gold",
+      //     color: "#30303c"
+      //   }
+      // }
+    ];
+
     return (
       <ApolloProvider client={apolloClient}>
         <div className="userProfile">
@@ -47,22 +80,24 @@ class LeagueTeams extends Component {
                   {data.leagues.map(league => (
                     <div key={league.id}>
                       <h2 key={league.name}>{league.name}</h2>
-                      {isAuthenticated() && (
-                        <Button bsStyle="primary" className="btn-margin">
-                          <Link
-                            className="createTeamBtn"
-                            to={`/hockey/createteam/${
-                              this.props.match.params.id
-                            }`}
-                          >
-                            Join League
-                          </Link>
-                        </Button>
-                      )}
+                      {isAuthenticated() &&
+                        (league.isLocked === false && (
+                          <Button bsStyle="primary" className="btn-margin">
+                            <Link
+                              className="createTeamBtn"
+                              to={`/hockey/createteam/${
+                                this.props.match.params.id
+                              }`}
+                            >
+                              Join League
+                            </Link>
+                          </Button>
+                        ))}
                       <ReactTable
                         data={league.fantasyTeams}
                         columns={LeagueTeamsColumns}
                         defaultPageSize={10}
+                        minRows={1}
                         resizable={false}
                         noDataText="Bloody hell... No teams!"
                         className="-striped -highlight allLeaguesTable"
