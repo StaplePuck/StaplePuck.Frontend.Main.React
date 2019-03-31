@@ -9,6 +9,9 @@ export const QueryGetLeagueTeams = gql`
       fantasyTeams {
         name
         id
+        gM {
+          externalId
+        }
       }
     }
   }

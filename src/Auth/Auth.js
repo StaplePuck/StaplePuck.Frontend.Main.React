@@ -5,9 +5,11 @@ import { GLOBAL_CONFIG } from "../App_Config/GlobalVariables";
 import ApolloClient from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpLink } from "apollo-link-http";
+import jwt_decode from "jwt-decode";
 
 export default class Auth {
   accessToken;
+  tokenSub;
   idToken;
   expiresAt;
   userProfile;
@@ -85,6 +87,9 @@ export default class Auth {
       }),
       cache: new InMemoryCache()
     });
+
+    var decoded = jwt_decode(this.accessToken);
+    this.tokenSub = decoded.sub;
     // navigate to the home route
     history.replace("/user");
   }
