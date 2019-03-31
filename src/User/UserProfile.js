@@ -33,8 +33,8 @@ class UserProfile extends Component {
                 return (
                   <div>
                     <UpdateEmailPref currentuser={data.currentUser} />
-                    <br />
-                    TODO: Add list of the user's leagues...
+                    {/* <br />
+                    TODO: Add list of the user's leagues... */}
                   </div>
                 );
               }}

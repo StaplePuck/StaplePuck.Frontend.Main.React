@@ -27,10 +27,12 @@ function ListofLeagues({ loading, error, leagues }) {
   return (
     <div className="allLeagues">
       <img className="mainLogo" src={Logo} alt="Logo" />
+      <h4>Current Leagues</h4>
       <ReactTable
         data={leagues}
         columns={AllLeagueColumns}
         defaultPageSize={10}
+        minRows={1}
         resizable={false}
         noDataText="Bloody hell... No leagues!"
         className="-striped -highlight allLeaguesTable"
