@@ -3,9 +3,12 @@
 }
 
 .allLeaguesTable {
-  margin-top: 0;
-  margin-left: 200px;
-  margin-right: 200px;
+  width: 100%;
+  margin: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 img {
@@ -55,4 +58,38 @@ img {
   background-color: #30303c;
   color: #fff;
   text-decoration: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .ReactTable {
+    border: none;
+  }
+
+  .ReactTable .rt-thead {
+    display: none;
+  }
+
+  .ReactTable .rt-tr {
+    display: table-row !important;
+    margin-bottom: 0 !important;
+  }
+
+  .ReactTable .tr-td {
+    display: table-cell !important;
+    text-align: left !important;
+    font-size: 14px !important;
+  }
+
+  .ReactTable .rt-td {
+    text-align: left !important;
+  }
+
+  .ReactTable .rt-tbody .rt-td {
+    border: none;
+    width: 100% !important;
+  }
+
+  .pagination-bottom {
+    visibility: hidden;
+  }
 }
