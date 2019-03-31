@@ -21,8 +21,8 @@
 import { gql } from "apollo-boost";
 
 export const MutationSetLineup = gql`
-  mutation($teamdata: FantasyTeamUpdateInput!) {
-    updateFantasyTeam(FantasyTeamUpdateInput: $teamdata) {
+  mutation($fantasyTeamUpdate: FantasyTeamUpdateInput!) {
+    updateFantasyTeam(fantasyTeam: $fantasyTeamUpdate) {
       id
       success
       message

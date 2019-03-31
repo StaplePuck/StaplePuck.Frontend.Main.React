@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { ApolloProvider, Query } from "react-apollo";
-import { Formik } from "formik";
+import { Formik, Field, Form, FieldArray } from "formik";
 import { Mutation } from "react-apollo";
 import * as Yup from "yup";
 import { QueryGetNHLData } from "../Queries/QueryGetNHLData";
@@ -45,7 +45,7 @@ class SetHockeyLineup extends Component {
                 return (
                   <div>
                     {data.fantasyTeams.map(Fteams => (
-                      <Mutation mutation={MutationSetLineup}>
+                      <Mutation mutation={MutationSetLineup} key={Fteams.id}>
                         {(updateFantasyTeam, { saving, error, data }) => (
                           <div className="userProfile">
                             <div className="userform">
@@ -60,52 +60,52 @@ class SetHockeyLineup extends Component {
                                 // initialValues={{
                                 //   name: "",
                                 // }}
-                                validationSchema={ProfileShema}
                                 onSubmit={values => {
+                                  var fantasyTeamPlayers = [];
+                                  values.player.forEach(element => {
+                                    if ((typeof(element) !== 'undefined') && (element !== null)) {
+                                      fantasyTeamPlayers.push({"playerId": element});
+                                    }
+                                  });
+                                  
                                   updateFantasyTeam({
                                     variables: {
-                                      fantasyTeam: {
-                                        id: this.props.match.params.id
+                                      fantasyTeamUpdate: {
+                                        id: Fteams.id,
+                                        "fantasyTeamPlayers": fantasyTeamPlayers
                                       }
                                     }
                                   });
                                 }}
-                                render={({
-                                  values,
-                                  errors,
-                                  touched,
-                                  handleChange,
-                                  handleBlur,
-                                  handleSubmit
-                                }) => (
-                                  <form onSubmit={handleSubmit}>
-                                    <h3 key={Fteams.id}>
+                                render={formProps => {
+                                  return(
+                                  <Form>
+                                    <h3>
                                       Team Name: {Fteams.name}
                                     </h3>
                                     <div>
-                                      {Fteams.league.season.teamSeasons.map(
+                                     {Fteams.league.season.teamSeasons.map(
                                         NHLTeam => (
-                                          <div className="userFormGroup">
-                                            <label
-                                              key={NHLTeam.team.locationName}
-                                            >
+                                          <div className="userFormGroup" key={NHLTeam.team.id}>
+                                            <label>
                                               {NHLTeam.team.fullName}
                                             </label>
-                                            <select name="player">
-                                              <option value="">
-                                                Select...
-                                              </option>
+                                            <Field 
+                                              name={`player.${NHLTeam.team.id}`} 
+                                              component="select" 
+                                              placeholder="Select...">
+
                                               {NHLTeam.playerSeasons.map(
                                                 Players => (
                                                   <option
                                                     key={Players.player.id}
                                                     value={Players.player.id}
                                                   >
-                                                    {Players.player.fullName}
+                                                    {Players.player.fullName} - {Players.positionType.shortName}
                                                   </option>
                                                 )
                                               )}
-                                            </select>
+                                            </Field>
                                           </div>
                                         )
                                       )}
@@ -113,8 +113,8 @@ class SetHockeyLineup extends Component {
                                     <div className="user-submit-block">
                                       <Button type="submit">Save</Button>
                                     </div>
-                                  </form>
-                                )}
+                                  </Form>
+                                )}}
                               />
                             </div>
                           </div>
