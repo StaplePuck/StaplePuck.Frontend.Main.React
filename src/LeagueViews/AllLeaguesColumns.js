@@ -42,7 +42,29 @@ export const AllLeagueColumns = [
     Header: "Description",
     accessor: "description",
     sortable: false,
-    style: { textAlign: "center" },
+    style: { "white-space": "unset", textAlign: "left" },
+    headerStyle: {
+      fontWeight: "bold",
+      backgroundColor: "gold",
+      color: "#30303c"
+    }
+  },
+  {
+    Header: "Payment Info",
+    accessor: "paymentInfo",
+    sortable: false,
+    style: { "white-space": "unset", textAlign: "left" },
+    headerStyle: {
+      fontWeight: "bold",
+      backgroundColor: "gold",
+      color: "#30303c"
+    }
+  },
+  {
+    Header: "Announcement",
+    accessor: "announcement",
+    sortable: false,
+    style: { "white-space": "unset", textAlign: "left", color: "red" },
     headerStyle: {
       fontWeight: "bold",
       backgroundColor: "gold",

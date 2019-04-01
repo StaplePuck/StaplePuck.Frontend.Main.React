@@ -6,6 +6,8 @@ export const AllLeaguesListQuery = gql`
       id
       name
       description
+      paymentInfo
+      announcement
       season {
         id
         fullName
