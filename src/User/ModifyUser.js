@@ -15,8 +15,7 @@ const ProfileShema = Yup.object().shape({
     .required("Handle is Required"),
   email: Yup.string()
     .email("Invalid email address")
-    .required("Email is Required"),
-  receiveEmails: Yup.boolean()
+    .required("Email is Required")
 });
 
 const AddUser = () => (
@@ -31,8 +30,7 @@ const AddUser = () => (
           <Formik
             initialValues={{
               handle: "",
-              email: "",
-              receiveEmails: false
+              email: ""
             }}
             validationSchema={ProfileShema}
             onSubmit={values => {
@@ -40,8 +38,7 @@ const AddUser = () => (
                 variables: {
                   user: {
                     email: values.email,
-                    name: values.handle,
-                    receiveEmails: values.receiveEmails
+                    name: values.handle
                   }
                 }
               });
@@ -82,7 +79,7 @@ const AddUser = () => (
                     <div className="userFormErrorBlock">{errors.email}</div>
                   )}
                 </div>
-                <div className="userFormGroup">
+                {/* <div className="userFormGroup">
                   <label>Receive Emails:</label>
                   <input
                     type="Checkbox"
@@ -90,7 +87,7 @@ const AddUser = () => (
                     onChange={handleChange}
                     value={values.receiveEmails}
                   />{" "}
-                </div>
+                </div> */}
 
                 <div className="user-submit-block">
                   <Button type="submit">Submit</Button>
