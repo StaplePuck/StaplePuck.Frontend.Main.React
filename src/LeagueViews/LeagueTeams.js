@@ -52,8 +52,9 @@ class LeagueTeams extends Component {
         }
       }
       // {
-      //   Header: "Score",
+      //   Header: "Points",
       //   accessor: "teamScore",
+      //   Cell: props => <span>{props.value} pts</span>,
       //   style: { textAlign: "center" },
       //   headerStyle: {
       //     fontWeight: "bold",
