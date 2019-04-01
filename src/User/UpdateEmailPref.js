@@ -11,8 +11,7 @@ import "../Assets/css/User/UserProfile.css";
 const ProfileShema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email address")
-    .required("Email is Required"),
-  receiveEmails: Yup.boolean
+    .required("Email is Required")
 });
 
 const UpdateEmailPref = props => (
@@ -34,7 +33,7 @@ const UpdateEmailPref = props => (
               updateUser({
                 variables: {
                   user: {
-                    receiveEmails: values.receiveEmails,
+                    //receiveEmails: values.receiveEmails,
                     email: values.email
                   }
                 }
@@ -62,7 +61,7 @@ const UpdateEmailPref = props => (
                     <div className="userFormErrorBlock">{errors.email}</div>
                   )}
                 </div>
-                <div className="userFormGroup">
+                {/* <div className="userFormGroup">
                   <label>Receive Emails:</label>
                   <input
                     type="Checkbox"
@@ -70,7 +69,7 @@ const UpdateEmailPref = props => (
                     onChange={handleChange}
                     value={values.receiveEmails}
                   />{" "}
-                </div>
+                </div> */}
 
                 <div>
                   <Button type="submit">Submit</Button>
