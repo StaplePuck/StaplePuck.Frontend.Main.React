@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import { ApolloProvider, Query } from "react-apollo";
-import { Formik, Field, Form, FieldArray } from "formik";
+import { Formik, Field, Form } from "formik";
 import { Mutation } from "react-apollo";
 import * as Yup from "yup";
 import { QueryGetNHLData } from "../Queries/QueryGetNHLData";
@@ -11,6 +11,7 @@ import LoginPage from "../../Home/Login";
 //Assets
 import "../../Assets/css/Leagues/AllLeagues.css";
 import Logo from "../../Assets/Images/logo-white-with-name.jpg";
+import { transformOperation } from "apollo-link/lib/linkUtils";
 
 const ProfileShema = Yup.object().shape({
   name: Yup.string()
@@ -20,6 +21,22 @@ const ProfileShema = Yup.object().shape({
 });
 
 class SetHockeyLineup extends Component {
+  FindTeam(season, playerId) {
+    try {
+      season.teamSeasons.some(ts => {
+        ts.playerSeasons.some(ps => {
+          if (ps.player.id === playerId) {
+            throw ts.team;
+          }
+        });
+      });
+    }
+    catch (value) {
+      return value;
+    }
+    return ''; 
+  }
+
   render() {
     let teamId = {
       teamId: this.props.match.params.id
@@ -42,12 +59,20 @@ class SetHockeyLineup extends Component {
                 if (!data || !data.fantasyTeams) {
                   return <div>No data was returned</div>;
                 }
+                var initValues = {};
+                data.fantasyTeams.forEach(fteam => {
+                  fteam.fantasyTeamPlayers.forEach(p => {
+                    var team = this.FindTeam(fteam.league.season, p.player.id);
+                    var playerKey = "player" + team.id;
+                    initValues[playerKey] = p.player.id;
+                  });
+                });
                 return (
                   <div>
-                    {data.fantasyTeams.map(Fteams => (
+                    {data.fantasyTeams.map(Fteams => ( 
                       this.props.auth.tokenSub === Fteams.gM.externalId ? (
-                        <div>
-                          <Mutation mutation={MutationSetLineup} key={Fteams.id}>
+                        <div key={Fteams.id}>
+                          <Mutation mutation={MutationSetLineup}>
                             {(updateFantasyTeam, { saving, error, data }) => (
                               <div className="userProfile">
                                 <div className="userform">
@@ -59,16 +84,15 @@ class SetHockeyLineup extends Component {
                                     data.updateFantasyTeam &&
                                     alert("Team Saved")}
                                   <Formik
-                                    // initialValues={{
-                                    //   name: "",
-                                    // }}
+                                    initialValues={
+                                      initValues
+                                    }
                                     onSubmit={values => {
                                       var fantasyTeamPlayers = [];
-                                      values.player.forEach(element => {
-                                        if ((typeof(element) !== 'undefined') && (element !== null)) {
-                                          fantasyTeamPlayers.push({"playerId": element});
-                                        }
-                                      });
+                                      console.log("submitting");
+                                      for (let [key, value] of Object.entries(values)) {
+                                        fantasyTeamPlayers.push({"playerId": value});
+                                      }
                                       
                                       updateFantasyTeam({
                                         variables: {
@@ -93,7 +117,7 @@ class SetHockeyLineup extends Component {
                                                   {NHLTeam.team.fullName}
                                                 </label>
                                                 <Field 
-                                                  name={`player.${NHLTeam.team.id}`} 
+                                                  name={`player${NHLTeam.team.id}`} 
                                                   component="select" 
                                                   placeholder="Select...">
 
