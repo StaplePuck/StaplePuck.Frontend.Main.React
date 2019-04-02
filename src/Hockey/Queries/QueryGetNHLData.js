@@ -9,6 +9,11 @@ export const QueryGetNHLData = gql`
         externalId
         id
       }
+      fantasyTeamPlayers {
+        player {
+          id
+        }
+      }
       league {
         season {
           id
