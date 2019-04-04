@@ -34,8 +34,8 @@ function ListofLeagues({ loading, error, leagues }) {
         defaultPageSize={10}
         minRows={1}
         resizable={false}
+        showPagination={false}
         noDataText="Bloody hell... No leagues!"
-        className="-striped -highlight allLeaguesTable"
       />
     </div>
   );

@@ -12,38 +12,28 @@
 }
 
 img {
-  margin: 0;
+  margin: 10px;
   max-width: 100%;
   max-height: 100%;
 }
 
 .mainLogo {
-  height: 150px;
   width: 150px;
-  display: inline-block;
+  height: 150px;
+  border: solid 1px rgb(153, 149, 149);
+	background-color: #eed;
+	box-shadow: -10px 10px  rgba(0,0,0,0.6);
+	-moz-box-shadow: -10px 10px rgba(0,0,0,0.6);
+	-webkit-box-shadow: -10px 10px rgba(0,0,0,0.6);
+	-o-box-shadow: -10px 10px rgba(0,0,0,0.6);
+	border-radius: 100px;
 }
 
-.ReactTable.-striped .rt-tr.-odd {
+.ReactTable {
+  border: #555;
+  margin: 5px;
+  color: #000;
   background-color: #fff;
-  color: #000;
-}
-
-.-even {
-  background-color: lightgray;
-  color: #000;
-}
-
-.ReactTable.-highlight .rt-tbody .rt-tr:not(.-padRow):hover {
-  background: #fff;
-  color: #000;
-}
-
-.pagination-bottom {
-  background-color: #fff;
-}
-
-.ReactTable .-pagination .-center {
-  color: #000;
 }
 
 .createTeamBtn {
@@ -51,13 +41,12 @@ img {
   color: #000;
 }
 
-.createTeamBtn:hover,
-.createTeamBtn:focus,
-.createTeamBtn:active,
-.createTeamBtn.active {
-  background-color: #30303c;
-  color: #fff;
-  text-decoration: none;
+.rt-mobileHeader {
+  display: none;
+}
+
+.rt-Link {
+ display: inline-block;
 }
 
 @media only screen and (max-width: 600px) {
@@ -89,7 +78,9 @@ img {
     width: 100% !important;
   }
 
-  .pagination-bottom {
-    visibility: hidden;
+  .rt-mobileHeader {
+    width: 105px;
+    display: inline-block;
+    color: #000;
   }
 }

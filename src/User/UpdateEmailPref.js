@@ -19,10 +19,10 @@ const UpdateEmailPref = props => (
     {(updateUser, { loading, error, data }) => (
       <div className="userProfile">
         <div className="userform">
-          <h5>Set your your email preferences</h5>
+          <h5>Update Your Information</h5>
           {loading && console.log(loading.valueOf())}
           {error && console.log(error.graphQLErrors)}
-          {data && data.updateUser && alert("Email Preferences Set")}
+          {data && data.updateUser && alert("Update Complete")}
           <Formik
             initialValues={{
               receiveEmails: props.currentuser.receiveEmails,
