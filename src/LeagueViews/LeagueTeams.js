@@ -38,7 +38,7 @@ class LeagueTeams extends Component {
         id: "id",
         Cell: props =>
           this.props.auth.tokenSub === props.original.gM.externalId ? (
-            <Link to={`../hockey/setlineup/${props.original.id}`}>
+            <Link className="grid-link-style" to={`../hockey/setlineup/${props.original.id}`}>
               {props.value}
             </Link>
           ) : (
@@ -46,22 +46,32 @@ class LeagueTeams extends Component {
             ),
         style: { textAlign: "center" },
         headerStyle: {
-          fontWeight: "bold",
-          backgroundColor: "gold",
-          color: "#30303c"
+          color: "#000",
+          background: "rgb(255,214,94)",
+          background:
+            "-moz-linear-gradient(top, rgba(255,214,94,1) 0%, rgba(254,191,4,1) 100%)",
+          background:
+            "-webkit-linear-gradient(top, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)",
+          background:
+            "linear-gradient(to bottom, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)"
+        }
+      },
+      {
+        Header: "Points",
+        accessor: "teamScore",
+        Cell: props => <span>{props.value} pts</span>,
+        style: { textAlign: "center" },
+        headerStyle: {
+          color: "#000",
+          background: "rgb(255,214,94)",
+          background:
+            "-moz-linear-gradient(top, rgba(255,214,94,1) 0%, rgba(254,191,4,1) 100%)",
+          background:
+            "-webkit-linear-gradient(top, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)",
+          background:
+            "linear-gradient(to bottom, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)"
         }
       }
-      // {
-      //   Header: "Points",
-      //   accessor: "teamScore",
-      //   Cell: props => <span>{props.value} pts</span>,
-      //   style: { textAlign: "center" },
-      //   headerStyle: {
-      //     fontWeight: "bold",
-      //     backgroundColor: "gold",
-      //     color: "#30303c"
-      //   }
-      // }
     ];
 
     return (

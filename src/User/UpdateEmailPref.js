@@ -19,7 +19,7 @@ const UpdateEmailPref = props => (
     {(updateUser, { loading, error, data }) => (
       <div className="userProfile">
         <div className="userform">
-          <h5>Update Your Information</h5>
+          <h5>Feel free to update your email address</h5>
           {loading && console.log(loading.valueOf())}
           {error && console.log(error.graphQLErrors)}
           {data && data.updateUser && alert("Update Complete")}
@@ -47,21 +47,21 @@ const UpdateEmailPref = props => (
               handleBlur,
               handleSubmit
             }) => (
-              <form onSubmit={handleSubmit}>
-                <div className="userFormGroup">
-                  <label>Email:</label>
-                  <input
-                    type="Email"
-                    name="email"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                  />
-                  {touched.email && errors && errors.email && (
-                    <div className="userFormErrorBlock">{errors.email}</div>
-                  )}
-                </div>
-                {/* <div className="userFormGroup">
+                <form onSubmit={handleSubmit}>
+                  <div className="userFormGroup">
+                    <label>Email:</label>
+                    <input
+                      type="Email"
+                      name="email"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.email}
+                    />
+                    {touched.email && errors && errors.email && (
+                      <div className="userFormErrorBlock">{errors.email}</div>
+                    )}
+                  </div>
+                  {/* <div className="userFormGroup">
                   <label>Receive Emails:</label>
                   <input
                     type="Checkbox"
@@ -71,11 +71,11 @@ const UpdateEmailPref = props => (
                   />{" "}
                 </div> */}
 
-                <div>
-                  <Button type="submit">Submit</Button>
-                </div>
-              </form>
-            )}
+                  <div>
+                    <Button type="submit">Update</Button>
+                  </div>
+                </form>
+              )}
           />
         </div>
       </div>

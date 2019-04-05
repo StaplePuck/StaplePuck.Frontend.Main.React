@@ -50,6 +50,11 @@ class SetHockeyLineup extends Component {
           <div className="teamMain">
             <div className="teamFormLogo">
               <img className="mainLogo" src={Logo} alt="Logo" />
+              <br />
+              You must selcet one player from each NHL team and the following number of players:
+              10 Forwards (F),
+              4 Defenseman (D), and
+              2 Goalies (G)
             </div>
             <Query variables={teamId} query={QueryGetNHLData}>
               {({ loading, error, data }) => {
@@ -76,26 +81,26 @@ class SetHockeyLineup extends Component {
                             {(updateFantasyTeam, { saving, error, data }) => (
                               <div className="mainTeamSet">
                                 {saving && <div>We're saving.. Hold on tight</div>}
-                                {error && (
-                                  <div>Error Saving... {console.log(error)}</div>
-                                )}
+                                {error &&
+                                  <div>Error Saving... {error.message}</div>
+                                }
                                 {data &&
-                                  data.updateFantasyTeam &&
+                                  data.updateFantasyTeam.success == true &&
                                   alert("Team Saved")}
                                 <Formik
                                   initialValues={initValues}
                                   onSubmit={values => {
-                                    var fantasyTeamPlayers = [];
-                                    console.log("submitting");
+                                    var fantasyTeamPlayersArray = [];
                                     for (let [key, value] of Object.entries(values)) {
-                                      fantasyTeamPlayers.push({ "playerId": value });
+                                      fantasyTeamPlayersArray.push({ playerId: parseInt(value, 10) });
+                                      console.log(fantasyTeamPlayersArray)
                                     }
 
                                     updateFantasyTeam({
                                       variables: {
                                         fantasyTeamUpdate: {
                                           id: Fteams.id,
-                                          "fantasyTeamPlayers": fantasyTeamPlayers
+                                          fantasyTeamPlayers: fantasyTeamPlayersArray
                                         }
                                       }
                                     });
@@ -103,7 +108,8 @@ class SetHockeyLineup extends Component {
                                   render={formProps => {
                                     return (
                                       <Form className="teamForm">
-                                        <h4> {Fteams.name}</h4>                                      <div>
+                                        <h4> {Fteams.name}</h4>
+                                        <div>
                                           {Fteams.league.season.teamSeasons.map(
                                             NHLTeam => (
                                               <div>
@@ -117,6 +123,7 @@ class SetHockeyLineup extends Component {
                                                   component="select"
                                                   className="teamFormSelect"
                                                   placeholder="Select...">
+                                                  <option value="">Select..</option>
                                                   {NHLTeam.playerSeasons.map(
                                                     Players => (
                                                       <option

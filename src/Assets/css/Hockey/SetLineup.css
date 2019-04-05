@@ -7,10 +7,13 @@
   margin-right: auto;
   max-width: 500px;
 }
+
 .teamForm {
   padding-left: 20px;
-  color: white;
+  color: #000;
+  padding-bottom: 10px;
 }
+
 
 .teamFormLabel {
   display: inline-block;
@@ -21,6 +24,8 @@
   color: #000;
   margin: 5px;
   width: 250px;
+  height: 30px;
+  background: gold;
 }
 
 .teamFormSubmit {
@@ -41,5 +46,12 @@
 
   .btn-default{
     margin: 0;
+  }
+
+  .teamFormSelect {
+    color: #000;
+    width: 250px;
+    height: 30px;
+    background: gold;
   }
 }
