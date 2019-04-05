@@ -31,7 +31,6 @@ function ListofLeagues({ loading, error, leagues }) {
       <ReactTable
         data={leagues}
         columns={AllLeagueColumns}
-        defaultPageSize={10}
         minRows={1}
         resizable={false}
         showPagination={false}

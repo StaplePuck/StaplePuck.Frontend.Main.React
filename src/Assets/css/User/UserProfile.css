@@ -47,9 +47,9 @@ input[type="Checkbox"] {
 }
 
 .btn-default {
-  background-color: gold;
-  border-color: gold;
-  color: #000;
+  background-color: #30303c;
+  border-color: #30303c;
+  color: #fff;
   margin: 2em;
 }
 
@@ -58,9 +58,9 @@ input[type="Checkbox"] {
 .btn-default:active,
 .btn-default.active,
 .open > .dropdown-toggle.btn-default {
-  background-color: #30303c;
-  border-color: #fff;
-  color: #fff;
+  background-color: gold;
+  border-color: gold;
+  color: #000;
 }
 
 .btn:focus {

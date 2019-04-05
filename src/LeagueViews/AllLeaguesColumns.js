@@ -11,7 +11,7 @@ export const AllLeagueColumns = [
         <div className="rt-mobileHeader">
           League:
         </div>
-        <Link alt={`Link to the ${props.value} league`} className="rt-Link" to={`/league/${props.original.id}`}>{props.value}</Link>
+        <Link alt={`Link to the ${props.value} league`} className="grid-link-style" to={`/league/${props.original.id}`}>{props.value}</Link>
       </span>
     ),
     style: { textAlign: "left" },

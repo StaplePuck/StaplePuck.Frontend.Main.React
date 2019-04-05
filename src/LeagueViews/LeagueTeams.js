@@ -42,8 +42,8 @@ class LeagueTeams extends Component {
               {props.value}
             </Link>
           ) : (
-            <span>{props.value}</span>
-          ),
+              <span>{props.value}</span>
+            ),
         style: { textAlign: "center" },
         headerStyle: {
           fontWeight: "bold",
@@ -84,22 +84,22 @@ class LeagueTeams extends Component {
 
                       {/* Determine if we can show the Join Leage button */}
                       {isAuthenticated() && // The user has to be logged in
-                      league.isLocked === false && // The league can't be locked
-                      league.fantasyTeams.length === 0 && ( // There are no fantasy teams created at all
-                          <Button bsStyle="primary" className="btn-margin">
-                            <Link
-                              className="createTeamBtn"
-                              to={`/hockey/createteam/${
-                                this.props.match.params.id
+                        league.isLocked === false && // The league can't be locked
+                        league.fantasyTeams.length === 0 && ( // There are no fantasy teams created at all
+
+                          <Link
+                            className="link-style"
+                            to={`/hockey/createteam/${
+                              this.props.match.params.id
                               }`}
-                            >
-                              Join League
+                          >
+                            Join League
                             </Link>
-                          </Button>
+
                         )}
 
                       {isAuthenticated() && // The user has to be logged in
-                      league.isLocked !== false && // The league can't be locked
+                        league.isLocked !== false && // The league can't be locked
                         league.fantasyTeams.some(
                           val =>
                             val.gM.externalId !== this.props.auth.tokenSub && ( // The user has not created a fantasy team yet
@@ -108,7 +108,7 @@ class LeagueTeams extends Component {
                                   className="createTeamBtn"
                                   to={`/hockey/createteam/${
                                     this.props.match.params.id
-                                  }`}
+                                    }`}
                                 >
                                   Join League
                                 </Link>
@@ -118,9 +118,9 @@ class LeagueTeams extends Component {
                       <ReactTable
                         data={league.fantasyTeams}
                         columns={LeagueTeamsColumns}
-                        defaultPageSize={10}
                         minRows={1}
                         resizable={false}
+                        showPagination={false}
                         noDataText="Bloody hell... No teams!"
                         className="-striped -highlight allLeaguesTable"
                       />
