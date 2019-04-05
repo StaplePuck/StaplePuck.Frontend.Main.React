@@ -17,9 +17,9 @@
 }
 
 .btn-primary {
-  background-color: gold;
-  border-color: transparent;
-  color: #000;
+  background-color: #30303c;
+  border-color: #30303c;
+  color: #fff;
 }
 
 .btn-primary:hover,
@@ -27,15 +27,15 @@
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
-  background-color: #30303c;
-  border-color: #fff;
-  color: #fff;
-}
-
-.btn-primary:active:focus {
   background-color: gold;
   border-color: gold;
   color: #000;
+}
+
+.btn-primary:active:focus {
+  background-color: #30303c;
+  border-color: #30303c;
+  color: #fff;
 }
 
 .btn:focus {

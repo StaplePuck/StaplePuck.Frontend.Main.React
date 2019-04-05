@@ -19,10 +19,10 @@ const UpdateEmailPref = props => (
     {(updateUser, { loading, error, data }) => (
       <div className="userProfile">
         <div className="userform">
-          <h5>Set your your email preferences</h5>
+          <h5>Feel free to update your email address</h5>
           {loading && console.log(loading.valueOf())}
           {error && console.log(error.graphQLErrors)}
-          {data && data.updateUser && alert("Email Preferences Set")}
+          {data && data.updateUser && alert("Update Complete")}
           <Formik
             initialValues={{
               receiveEmails: props.currentuser.receiveEmails,
@@ -47,21 +47,21 @@ const UpdateEmailPref = props => (
               handleBlur,
               handleSubmit
             }) => (
-              <form onSubmit={handleSubmit}>
-                <div className="userFormGroup">
-                  <label>Email:</label>
-                  <input
-                    type="Email"
-                    name="email"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                  />
-                  {touched.email && errors && errors.email && (
-                    <div className="userFormErrorBlock">{errors.email}</div>
-                  )}
-                </div>
-                {/* <div className="userFormGroup">
+                <form onSubmit={handleSubmit}>
+                  <div className="userFormGroup">
+                    <label>Email:</label>
+                    <input
+                      type="Email"
+                      name="email"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.email}
+                    />
+                    {touched.email && errors && errors.email && (
+                      <div className="userFormErrorBlock">{errors.email}</div>
+                    )}
+                  </div>
+                  {/* <div className="userFormGroup">
                   <label>Receive Emails:</label>
                   <input
                     type="Checkbox"
@@ -71,11 +71,13 @@ const UpdateEmailPref = props => (
                   />{" "}
                 </div> */}
 
-                <div>
-                  <Button type="submit">Submit</Button>
-                </div>
-              </form>
-            )}
+                  <div>
+                    <Button type="submit">Update</Button>
+                  </div>
+                  <br />
+                  <a target="_blank" href="https://www.termsfeed.com/privacy-policy/1d035b59d3dcbf692dbce4eead4ec7d8">Leagal Stuff</a>
+                </form>
+              )}
           />
         </div>
       </div>

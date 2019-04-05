@@ -7,68 +7,144 @@ export const AllLeagueColumns = [
     accessor: "name",
     id: "id",
     Cell: props => (
-      <Link to={`/league/${props.original.id}`}>{props.value}</Link>
+      <span>
+        <div className="rt-mobileHeader">
+          League:
+        </div>
+        <Link alt={`Link to the ${props.value} league`} className="grid-link-style" to={`/league/${props.original.id}`}>{props.value}</Link>
+      </span>
     ),
-    style: { textAlign: "center" },
+    style: { textAlign: "left" },
     headerStyle: {
-      fontWeight: "bold",
-      backgroundColor: "gold",
-      color: "#30303c"
+      color: "#000",
+      background: "rgb(255,214,94)",
+      background:
+        "-moz-linear-gradient(top, rgba(255,214,94,1) 0%, rgba(254,191,4,1) 100%)",
+      background:
+        "-webkit-linear-gradient(top, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)",
+      background:
+        "linear-gradient(to bottom, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)"
     }
   },
   {
     Header: "Sport",
     accessor: "season.sport.name",
-    //Cell: e => <a href={`/sport/${e.id}`}> {e.value} </a>,
-    style: { textAlign: "center" },
+    Cell: props => (
+      <span>
+        <div className="rt-mobileHeader">
+          Sport:
+        </div>
+        {props.value}
+      </span>
+    ),
+    style: { textAlign: "left" },
     headerStyle: {
-      fontWeight: "bold",
-      backgroundColor: "gold",
-      color: "#30303c"
+      color: "#000",
+      background: "rgb(255,214,94)",
+      background:
+        "-moz-linear-gradient(top, rgba(255,214,94,1) 0%, rgba(254,191,4,1) 100%)",
+      background:
+        "-webkit-linear-gradient(top, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)",
+      background:
+        "linear-gradient(to bottom, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)"
     }
   },
   {
     Header: "Season",
     accessor: "season.fullName",
     sortable: false,
-    style: { textAlign: "center" },
+    Cell: props => (
+      <span>
+        <div className="rt-mobileHeader">
+          Season:
+        </div>
+        {props.value}
+      </span>
+    ),
+    style: { textAlign: "left" },
     headerStyle: {
-      fontWeight: "bold",
-      backgroundColor: "gold",
-      color: "#30303c"
+      color: "#000",
+      background: "rgb(255,214,94)",
+      background:
+        "-moz-linear-gradient(top, rgba(255,214,94,1) 0%, rgba(254,191,4,1) 100%)",
+      background:
+        "-webkit-linear-gradient(top, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)",
+      background:
+        "linear-gradient(to bottom, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)"
     }
   },
   {
     Header: "Description",
     accessor: "description",
     sortable: false,
-    style: { "white-space": "unset", textAlign: "left" },
+    Cell: props => (
+      <span>
+        <div className="rt-mobileHeader">
+          Description:
+        </div>
+        {props.value}
+      </span>
+    ),
+    style: { whiteSpace: "unset", textAlign: "left" },
     headerStyle: {
-      fontWeight: "bold",
-      backgroundColor: "gold",
-      color: "#30303c"
+      color: "#000",
+      background: "rgb(255,214,94)",
+      background:
+        "-moz-linear-gradient(top, rgba(255,214,94,1) 0%, rgba(254,191,4,1) 100%)",
+      background:
+        "-webkit-linear-gradient(top, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)",
+      background:
+        "linear-gradient(to bottom, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)"
     }
   },
-  {
-    Header: "Payment Info",
-    accessor: "paymentInfo",
-    sortable: false,
-    style: { "white-space": "unset", textAlign: "left" },
-    headerStyle: {
-      fontWeight: "bold",
-      backgroundColor: "gold",
-      color: "#30303c"
-    }
-  },
+  // {
+  //   Header: "Payment Info",
+  //   accessor: "paymentInfo",
+  //   sortable: false,
+  //   Cell: props => (
+  //     <span>
+  //       <div className="rt-mobileHeader">
+  //         Payment Info:
+  //       </div>
+  //       {props.value}
+  //     </span>
+  //   ),
+  //   style: { whiteSpace: "unset", textAlign: "left" },
+  //   headerStyle: {
+  //     color: "#000",
+  //     background: "rgb(255,214,94)",
+  //     background:
+  //       "-moz-linear-gradient(top, rgba(255,214,94,1) 0%, rgba(254,191,4,1) 100%)",
+  //     background:
+  //       "-webkit-linear-gradient(top, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)",
+  //     background:
+  //       "linear-gradient(to bottom, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)"
+  //   }
+  // },
   {
     Header: "Announcement",
     accessor: "announcement",
     sortable: false,
-    style: { "white-space": "unset", textAlign: "left", color: "red" },
+    Cell: props => (
+      <span>
+        <div className="rt-mobileHeader">
+          Announcement:
+        </div>
+        <div className="rt-mobileField">
+          {props.value}
+        </div>
+      </span>
+    ),
+    style: { whiteSpace: "unset", textAlign: "left", color: "red" },
     headerStyle: {
-      fontWeight: "bold",
-      backgroundColor: "gold",
-      color: "#30303c"
+      color: "#000",
+      background: "rgb(255,214,94)",
+      background:
+        "-moz-linear-gradient(top, rgba(255,214,94,1) 0%, rgba(254,191,4,1) 100%)",
+      background:
+        "-webkit-linear-gradient(top, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)",
+      background:
+        "linear-gradient(to bottom, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)"
     }
   }
 ];

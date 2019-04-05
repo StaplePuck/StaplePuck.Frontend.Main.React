@@ -31,11 +31,10 @@ function ListofLeagues({ loading, error, leagues }) {
       <ReactTable
         data={leagues}
         columns={AllLeagueColumns}
-        defaultPageSize={10}
         minRows={1}
         resizable={false}
+        showPagination={false}
         noDataText="Bloody hell... No leagues!"
-        className="-striped -highlight allLeaguesTable"
       />
     </div>
   );
@@ -52,6 +51,7 @@ class MainLeagues extends Component {
   render() {
     return (
       <div>
+
         <ApolloProvider client={apolloClient}>
           <LeagueData />
         </ApolloProvider>

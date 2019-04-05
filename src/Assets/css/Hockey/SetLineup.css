@@ -1,0 +1,57 @@
+.teamFormLogo {
+  text-align: center;
+}
+
+.mainTeamSet {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 500px;
+}
+
+.teamForm {
+  padding-left: 20px;
+  color: #000;
+  padding-bottom: 10px;
+}
+
+
+.teamFormLabel {
+  display: inline-block;
+  width: 175px;
+}
+
+.teamFormSelect {
+  color: #000;
+  margin: 5px;
+  width: 250px;
+  height: 30px;
+  background: gold;
+}
+
+.teamFormSubmit {
+  text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .teamFormSelect {
+    background-color: #fff;
+    margin-top: 5px;
+    margin-left: 0;
+  }
+
+  .teamFormSubmit {
+    text-align: left;
+    
+  }
+
+  .btn-default{
+    margin: 0;
+  }
+
+  .teamFormSelect {
+    color: #000;
+    width: 250px;
+    height: 30px;
+    background: gold;
+  }
+}

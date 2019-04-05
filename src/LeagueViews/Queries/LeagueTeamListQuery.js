@@ -6,6 +6,8 @@ export const QueryGetLeagueTeams = gql`
       id
       name
       isLocked
+      paymentInfo
+      announcement
       fantasyTeams {
         name
         id

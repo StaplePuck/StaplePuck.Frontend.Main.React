@@ -38,30 +38,40 @@ class LeagueTeams extends Component {
         id: "id",
         Cell: props =>
           this.props.auth.tokenSub === props.original.gM.externalId ? (
-            <Link to={`../hockey/setlineup/${props.original.id}`}>
+            <Link className="grid-link-style" to={`../hockey/setlineup/${props.original.id}`}>
               {props.value}
             </Link>
           ) : (
-            <span>{props.value}</span>
-          ),
+              <span>{props.value}</span>
+            ),
         style: { textAlign: "center" },
         headerStyle: {
-          fontWeight: "bold",
-          backgroundColor: "gold",
-          color: "#30303c"
+          color: "#000",
+          background: "rgb(255,214,94)",
+          background:
+            "-moz-linear-gradient(top, rgba(255,214,94,1) 0%, rgba(254,191,4,1) 100%)",
+          background:
+            "-webkit-linear-gradient(top, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)",
+          background:
+            "linear-gradient(to bottom, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)"
+        }
+      },
+      {
+        Header: "Points",
+        accessor: "teamScore",
+        Cell: props => <span>{props.value} pts</span>,
+        style: { textAlign: "center" },
+        headerStyle: {
+          color: "#000",
+          background: "rgb(255,214,94)",
+          background:
+            "-moz-linear-gradient(top, rgba(255,214,94,1) 0%, rgba(254,191,4,1) 100%)",
+          background:
+            "-webkit-linear-gradient(top, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)",
+          background:
+            "linear-gradient(to bottom, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)"
         }
       }
-      // {
-      //   Header: "Points",
-      //   accessor: "teamScore",
-      //   Cell: props => <span>{props.value} pts</span>,
-      //   style: { textAlign: "center" },
-      //   headerStyle: {
-      //     fontWeight: "bold",
-      //     backgroundColor: "gold",
-      //     color: "#30303c"
-      //   }
-      // }
     ];
 
     return (
@@ -81,25 +91,25 @@ class LeagueTeams extends Component {
                   {data.leagues.map(league => (
                     <div key={league.id}>
                       <h2 key={league.name}>{league.name}</h2>
-
+                      Please pay Nick Hetland $10 in person or through <a href="https://venmo.com/Nick-Hetland" target="_blank">Venmo</a> and include your team name.<br />
+                      {league.announcement}
                       {/* Determine if we can show the Join Leage button */}
                       {isAuthenticated() && // The user has to be logged in
-                      league.isLocked === false && // The league can't be locked
-                      league.fantasyTeams.length === 0 && ( // There are no fantasy teams created at all
-                          <Button bsStyle="primary" className="btn-margin">
-                            <Link
-                              className="createTeamBtn"
-                              to={`/hockey/createteam/${
-                                this.props.match.params.id
+                        league.isLocked === false && // The league can't be locked
+                        league.fantasyTeams.length === 0 && ( // There are no fantasy teams created at all
+                          <Link
+                            className="link-style"
+                            to={`/hockey/createteam/${
+                              this.props.match.params.id
                               }`}
-                            >
-                              Join League
+                          >
+                            Join League
                             </Link>
-                          </Button>
+
                         )}
 
                       {isAuthenticated() && // The user has to be logged in
-                      league.isLocked !== false && // The league can't be locked
+                        league.isLocked !== false && // The league can't be locked
                         league.fantasyTeams.some(
                           val =>
                             val.gM.externalId !== this.props.auth.tokenSub && ( // The user has not created a fantasy team yet
@@ -108,7 +118,7 @@ class LeagueTeams extends Component {
                                   className="createTeamBtn"
                                   to={`/hockey/createteam/${
                                     this.props.match.params.id
-                                  }`}
+                                    }`}
                                 >
                                   Join League
                                 </Link>
@@ -118,9 +128,9 @@ class LeagueTeams extends Component {
                       <ReactTable
                         data={league.fantasyTeams}
                         columns={LeagueTeamsColumns}
-                        defaultPageSize={10}
                         minRows={1}
                         resizable={false}
+                        showPagination={false}
                         noDataText="Bloody hell... No teams!"
                         className="-striped -highlight allLeaguesTable"
                       />

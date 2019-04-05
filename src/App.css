@@ -1,6 +1,6 @@
 body {
-  background-color: #30303c;
-  color: #fff;
+  background-color: #ddd;
+  color: #000;
 }
 
 .btn-margin {
@@ -8,8 +8,8 @@ body {
 }
 
 .btn-primary {
-  background-color: gold;
-  color: #000;
+  background-color: #000;
+  color: #fff;
 }
 
 .btn-primary:hover,
@@ -17,8 +17,8 @@ body {
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
-  background-color: #fff;
-  color: #000;
+  background-color: gold;
+  color: #fff;
 }
 
 .btn-primary:active:focus {
