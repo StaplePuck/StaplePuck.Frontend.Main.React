@@ -28,7 +28,6 @@ function ListofLeagues({ loading, error, leagues }) {
     <div className="allLeagues">
       <img className="mainLogo" src={Logo} alt="Logo" />
       <h4>Current Leagues</h4>
-      Please pay Nick Hetland $10 in person or through <a href="https://venmo.com/Nick-Hetland" target="_blank">Venmo</a> and include your team name.
       <ReactTable
         data={leagues}
         columns={AllLeagueColumns}

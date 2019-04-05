@@ -91,12 +91,12 @@ class LeagueTeams extends Component {
                   {data.leagues.map(league => (
                     <div key={league.id}>
                       <h2 key={league.name}>{league.name}</h2>
-
+                      Please pay Nick Hetland $10 in person or through <a href="https://venmo.com/Nick-Hetland" target="_blank">Venmo</a> and include your team name.<br />
+                      {league.announcement}
                       {/* Determine if we can show the Join Leage button */}
                       {isAuthenticated() && // The user has to be logged in
                         league.isLocked === false && // The league can't be locked
                         league.fantasyTeams.length === 0 && ( // There are no fantasy teams created at all
-
                           <Link
                             className="link-style"
                             to={`/hockey/createteam/${
