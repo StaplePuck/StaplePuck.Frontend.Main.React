@@ -74,6 +74,8 @@ const UpdateEmailPref = props => (
                   <div>
                     <Button type="submit">Update</Button>
                   </div>
+                  <br />
+                  <a target="_blank" href="https://www.termsfeed.com/privacy-policy/1d035b59d3dcbf692dbce4eead4ec7d8">Leagal Stuff</a>
                 </form>
               )}
           />
