@@ -4,6 +4,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { Mutation } from "react-apollo";
 import { AddUserQuery } from "./Queries/AddUserQuery";
+import { GetProfileQuery } from "./Queries/GetUserQuery";
 
 //Assests
 import "../Assets/css/User/UserProfile.css";
@@ -15,14 +16,21 @@ const ProfileShema = Yup.object().shape({
 });
 
 const UpdateEmailPref = props => (
-  <Mutation mutation={AddUserQuery}>
+  <Mutation mutation={AddUserQuery}
+    refetchQueries={() => {
+      return [{
+        query: GetProfileQuery
+      }];
+    }}
+    onCompleted={data => {
+      data.updateUser.success === true && alert("Update Complete");
+    }}>
     {(updateUser, { loading, error, data }) => (
       <div className="userProfile">
         <div className="userform">
           <h5>Feel free to update your email address</h5>
           {loading && console.log(loading.valueOf())}
           {error && console.log(error.graphQLErrors)}
-          {data && data.updateUser && alert("Update Complete")}
           <Formik
             initialValues={{
               receiveEmails: props.currentuser.receiveEmails,
