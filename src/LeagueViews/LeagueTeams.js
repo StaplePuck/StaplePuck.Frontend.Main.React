@@ -115,7 +115,8 @@ class LeagueTeams extends Component {
                       {/* Determine if we can show the Join Leage button */}
                       {isAuthenticated() && // The user has to be logged in
                         league.isLocked === false && // The league can't be locked
-                        league.fantasyTeams.length === 0 && ( // There are no fantasy teams created at all
+                        (league.allowMultipleTeams === true  || // The league allow multiple teams
+                        league.fantasyTeams.length === 0) && ( // There are no fantasy teams created at all
                           <Link
                             className="link-style"
                             to={`/hockey/createteam/${

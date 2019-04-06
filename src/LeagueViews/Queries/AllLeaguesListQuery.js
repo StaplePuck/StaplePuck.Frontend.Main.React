@@ -8,6 +8,7 @@ export const AllLeaguesListQuery = gql`
       description
       paymentInfo
       announcement
+      allowMultipleTeams
       season {
         id
         fullName
