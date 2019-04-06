@@ -23,6 +23,11 @@ const ProfileShema = Yup.object().shape({
 
 
 class SetHockeyLineup extends Component {
+  replaceError(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+  }
+
   scrollToTop() {
     window.scroll({
       top: 0,
@@ -87,21 +92,29 @@ class SetHockeyLineup extends Component {
                     {data.fantasyTeams.map(Fteams => (
                       this.props.auth.tokenSub === Fteams.gM.externalId ? (
                         <div key={Fteams.id}>
-                          <Mutation mutation={MutationSetLineup}>
-                            {(updateFantasyTeam, { saving, error, data }) => (
+                          <Mutation
+                            mutation={MutationSetLineup}
+                            refetchQueries={() => {
+                              return [{
+                                query: QueryGetNHLData,
+                                variables: teamId
+                              }];
+                            }}
+                            onCompleted={data => {
+                              data.updateFantasyTeam.success === true && alert("Save Complete");
+                            }}>
+                            {(updateFantasyTeam, { saving, error }) => (
+
                               <div className="mainTeamSet">
                                 {saving && <div>We're saving.. hold on tight</div>}
                                 {error &&
+
                                   <div className="team-save-error">
                                     <b>Sorry, there was an error saving...</b>
                                     <br />
-                                    {error.message}
+                                    {error.message.replace(/GraphQL error:/g, ".")}
                                     {this.scrollToTop()}
                                   </div>
-                                }
-                                {data &&
-                                  data.updateFantasyTeam.success == true &&
-                                  alert("Team Saved")
                                 }
                                 <Formik
                                   initialValues={initValues}
@@ -109,7 +122,6 @@ class SetHockeyLineup extends Component {
                                     var fantasyTeamPlayersArray = [];
                                     for (let [key, value] of Object.entries(values)) {
                                       fantasyTeamPlayersArray.push({ playerId: parseInt(value, 10) });
-                                      console.log(fantasyTeamPlayersArray)
                                     }
 
                                     updateFantasyTeam({
