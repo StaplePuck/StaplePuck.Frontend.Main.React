@@ -2,15 +2,6 @@
   text-align: center;
 }
 
-.allLeaguesTable {
-  width: 100%;
-  margin: 0;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
 img {
   margin: 10px;
   max-width: 100%;

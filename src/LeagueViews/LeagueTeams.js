@@ -13,7 +13,7 @@ import { QueryGetLeagueTeams } from "./Queries/LeagueTeamListQuery";
 //import { LeagueTeamsColumns } from "./LeagueTeamsColumns";
 
 //Assests
-import "../Assets/css/Leagues/AllLeagues.css";
+import "../Assets/css/Leagues/LeagueTables.css";
 import Logo from "../Assets/Images/logo-white-with-name.jpg";
 
 const apolloClient = new ApolloClient({
@@ -36,15 +36,25 @@ class LeagueTeams extends Component {
         Header: "Team",
         accessor: "name",
         id: "id",
-        Cell: props =>
+        Cell: props => (
           this.props.auth.tokenSub === props.original.gM.externalId ? (
-            <Link className="grid-link-style" to={`../hockey/setlineup/${props.original.id}`}>
+            <span>
+              <div className="rt-mobileHeader">
+                Team:
+              </div>
+              <Link className="grid-link-style" to={`../hockey/setlineup/${props.original.id}`}>
+                {props.value}
+              </Link>
+            </span>
+          ) :
+            <span>
+              <div className="rt-mobileHeader">
+                Team:
+              </div>
               {props.value}
-            </Link>
-          ) : (
-              <span>{props.value}</span>
-            ),
-        style: { textAlign: "center" },
+            </span>
+        ),
+        style: { textAlign: "left" },
         headerStyle: {
           color: "#000",
           background: "rgb(255,214,94)",
@@ -59,8 +69,15 @@ class LeagueTeams extends Component {
       {
         Header: "Points",
         accessor: "teamScore",
-        Cell: props => <span>{props.value} pts</span>,
-        style: { textAlign: "center" },
+        Cell: props => (
+          <span>
+            <div className="rt-mobileHeader">
+              Points:
+            </div>
+            {props.value}
+          </span>
+        ),
+        style: { textAlign: "left" },
         headerStyle: {
           color: "#000",
           background: "rgb(255,214,94)",
@@ -76,7 +93,7 @@ class LeagueTeams extends Component {
 
     return (
       <ApolloProvider client={apolloClient}>
-        <div className="userProfile">
+        <div className="allLeagues">
           <img className="mainLogo" src={Logo} alt="Logo" />
           <Query variables={leagueid} query={QueryGetLeagueTeams}>
             {({ loading, error, data }) => {
@@ -132,7 +149,6 @@ class LeagueTeams extends Component {
                         resizable={false}
                         showPagination={false}
                         noDataText="Bloody hell... No teams!"
-                        className="-striped -highlight allLeaguesTable"
                       />
                     </div>
                   ))}

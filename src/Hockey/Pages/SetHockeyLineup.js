@@ -20,7 +20,17 @@ const ProfileShema = Yup.object().shape({
     .required("Team Name is Required")
 });
 
+
+
 class SetHockeyLineup extends Component {
+  scrollToTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  }
+
   FindTeam(season, playerId) {
     try {
       season.teamSeasons.some(ts => {
@@ -80,13 +90,19 @@ class SetHockeyLineup extends Component {
                           <Mutation mutation={MutationSetLineup}>
                             {(updateFantasyTeam, { saving, error, data }) => (
                               <div className="mainTeamSet">
-                                {saving && <div>We're saving.. Hold on tight</div>}
+                                {saving && <div>We're saving.. hold on tight</div>}
                                 {error &&
-                                  <div>Error Saving... {error.message}</div>
+                                  <div className="team-save-error">
+                                    <b>Sorry, there was an error saving...</b>
+                                    <br />
+                                    {error.message}
+                                    {this.scrollToTop()}
+                                  </div>
                                 }
                                 {data &&
                                   data.updateFantasyTeam.success == true &&
-                                  alert("Team Saved")}
+                                  alert("Team Saved")
+                                }
                                 <Formik
                                   initialValues={initValues}
                                   onSubmit={values => {

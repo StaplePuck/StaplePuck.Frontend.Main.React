@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 
 //Assets
-import "../Assets/css/Leagues/AllLeagues.css";
+import "../Assets/css/Leagues/LeagueTables.css";
 import Logo from "../Assets/Images/logo-white-with-name.jpg";
 
 class Login extends Component {
