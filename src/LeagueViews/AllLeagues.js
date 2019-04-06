@@ -11,7 +11,7 @@ import { AllLeaguesListQuery } from "../LeagueViews/Queries/AllLeaguesListQuery"
 import { AllLeagueColumns } from "./AllLeaguesColumns";
 
 //Assests
-import "../Assets/css/Leagues/AllLeagues.css";
+import "../Assets/css/Leagues/LeagueTables.css";
 import Logo from "../Assets/Images/logo-white-with-name.jpg";
 
 const apolloClient = new ApolloClient({
@@ -51,7 +51,6 @@ class MainLeagues extends Component {
   render() {
     return (
       <div>
-
         <ApolloProvider client={apolloClient}>
           <LeagueData />
         </ApolloProvider>
