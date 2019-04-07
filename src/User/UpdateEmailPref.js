@@ -25,7 +25,7 @@ const UpdateEmailPref = props => (
     onCompleted={data => {
       data.updateUser.success === true && alert("Update Complete");
     }}>
-    {(updateUser, { loading, error, data }) => (
+    {(updateUser, { loading, error }) => (
       <div className="userProfile">
         <div className="userform">
           <h5>Feel free to update your email address</h5>

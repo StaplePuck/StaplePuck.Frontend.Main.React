@@ -14,6 +14,7 @@ export default class Auth {
   expiresAt;
   userProfile;
   apolloClient;
+  userName;
 
   auth0 = new auth0.WebAuth({
     domain: AUTH_CONFIG.domain,

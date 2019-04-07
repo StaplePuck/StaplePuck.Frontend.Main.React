@@ -15,15 +15,10 @@ import Logo from "../../Assets/Images/logo-white-with-name.jpg";
 const ProfileShema = Yup.object().shape({
   name: Yup.string()
     .min(5, "Must be 5 characters or longer")
-    .max(20, "Must be 20 characters or less")
     .required("Team Name is Required")
 });
 
 class Createteam extends Component {
-  componentWillUpdate(teamid) {
-    this.onCreateSuccess(teamid);
-  }
-
   onCreateSuccess = data => {
     // navigate to the set lineup page
     this.props.history.replace(
@@ -73,10 +68,10 @@ class Createteam extends Component {
                           }];
                         }}
                       >
-                        {(createFantasyTeam, { saving, error }) => (
+                        {(createFantasyTeam, { loading, error }) => (
                           <div className="userProfile">
                             <div className="userform">
-                              {saving && <div>Saving...</div>}
+                              {loading && <div>Saving...</div>}
                               {error && (
                                 <div>
                                   Error saving your team...
