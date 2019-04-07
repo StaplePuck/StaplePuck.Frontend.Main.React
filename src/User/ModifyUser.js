@@ -18,15 +18,15 @@ const ProfileShema = Yup.object().shape({
     .required("Email is Required")
 });
 
+
 const AddUser = () => (
   <Mutation mutation={AddUserQuery}>
-    {(updateUser, { loading, error, data }) => (
+    {(updateUser, { loading, error }) => (
       <div className="userProfile">
         <div className="userform">
           <h5>Set your StaplePuck user handle</h5>
           {loading && console.log(loading)}
           {error && console.log(error)}
-          {data && data.updateUser && alert("Update Success")}
           <Formik
             initialValues={{
               handle: "",
@@ -51,35 +51,35 @@ const AddUser = () => (
               handleBlur,
               handleSubmit
             }) => (
-              <form onSubmit={handleSubmit}>
-                <div className="userFormGroup">
-                  <label>Handle:</label>
-                  <input
-                    type="Text"
-                    name="handle"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.handle}
-                  />
-                  {touched.handle && errors && errors.handle && (
-                    <div className="userFormErrorBlock">{errors.handle}</div>
-                  )}
-                </div>
+                <form onSubmit={handleSubmit}>
+                  <div className="userFormGroup">
+                    <label>Handle:</label>
+                    <input
+                      type="Text"
+                      name="handle"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.handle}
+                    />
+                    {touched.handle && errors && errors.handle && (
+                      <div className="userFormErrorBlock">{errors.handle}</div>
+                    )}
+                  </div>
 
-                <div className="userFormGroup">
-                  <label>Email:</label>
-                  <input
-                    type="Email"
-                    name="email"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                  />
-                  {touched.email && errors && errors.email && (
-                    <div className="userFormErrorBlock">{errors.email}</div>
-                  )}
-                </div>
-                {/* <div className="userFormGroup">
+                  <div className="userFormGroup">
+                    <label>Email:</label>
+                    <input
+                      type="Email"
+                      name="email"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.email}
+                    />
+                    {touched.email && errors && errors.email && (
+                      <div className="userFormErrorBlock">{errors.email}</div>
+                    )}
+                  </div>
+                  {/* <div className="userFormGroup">
                   <label>Receive Emails:</label>
                   <input
                     type="Checkbox"
@@ -89,16 +89,16 @@ const AddUser = () => (
                   />{" "}
                 </div> */}
 
-                <div className="user-submit-block">
-                  <Button type="submit">Submit</Button>
-                </div>
-                <div>
-                  Your hanlde will be associated with each team you create.
+                  <div className="user-submit-block">
+                    <Button type="submit">Submit</Button>
+                  </div>
+                  <div>
+                    Your hanlde will be associated with each team you create.
                   <br />
-                  Your team names will be set when you create a team.
+                    Your team names will be set when you create a team.
                 </div>
-              </form>
-            )}
+                </form>
+              )}
           />
         </div>
       </div>
