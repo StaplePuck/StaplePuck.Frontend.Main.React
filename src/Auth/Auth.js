@@ -14,6 +14,7 @@ export default class Auth {
   expiresAt;
   userProfile;
   apolloClient;
+  tokenRenewalTimeout;
   userName;
 
   auth0 = new auth0.WebAuth({
@@ -34,6 +35,7 @@ export default class Auth {
     this.getAccessToken = this.getAccessToken.bind(this);
     this.getIdToken = this.getIdToken.bind(this);
     this.renewSession = this.renewSession.bind(this);
+    this.scheduleRenewal();
   }
 
   login() {
@@ -89,6 +91,9 @@ export default class Auth {
       cache: new InMemoryCache()
     });
 
+    // schedule a token renewal
+    this.scheduleRenewal();
+
     var decoded = jwt_decode(this.accessToken);
     this.tokenSub = decoded.sub;
     // navigate to the home route
@@ -116,6 +121,9 @@ export default class Auth {
     this.expiresAt = 0;
     this.userProfile = null;
 
+    // Clear token renewal
+    clearTimeout(this.tokenRenewalTimeout);
+
     // Remove isLoggedIn flag from localStorage
     localStorage.removeItem("isLoggedIn");
 
@@ -128,5 +136,19 @@ export default class Auth {
     // access token's expiry time
     let expiresAt = this.expiresAt;
     return new Date().getTime() < expiresAt;
+  }
+
+  scheduleRenewal() {
+    let expiresAt = this.expiresAt;
+    const timeout = expiresAt - Date.now();
+    if (timeout > 0) {
+      this.tokenRenewalTimeout = setTimeout(() => {
+        this.renewSession();
+      }, timeout);
+    }
+  }
+
+  getExpiryDate() {
+    return JSON.stringify(new Date(this.expiresAt));
   }
 }
