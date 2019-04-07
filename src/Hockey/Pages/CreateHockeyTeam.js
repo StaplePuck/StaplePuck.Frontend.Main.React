@@ -4,7 +4,7 @@ import { ApolloProvider, Query } from "react-apollo";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Mutation } from "react-apollo";
-import { QueryGetLeagueTeams } from "../Queries/GetLeagueTeams";
+import { QueryGetLeagueTeams } from "../../LeagueViews/Queries/LeagueTeamListQuery";
 import { QueryCreateTeam } from "../Queries/CreateTeam";
 import LoginPage from "../../Home/Login";
 
@@ -66,6 +66,12 @@ class Createteam extends Component {
                         onCompleted={data => {
                           this.onCreateSuccess(data);
                         }}
+                        refetchQueries={() => {
+                          return [{
+                            query: QueryGetLeagueTeams,
+                            variables: leagueid
+                          }];
+                        }}
                       >
                         {(createFantasyTeam, { saving, error }) => (
                           <div className="userProfile">
@@ -102,30 +108,30 @@ class Createteam extends Component {
                                   handleBlur,
                                   handleSubmit
                                 }) => (
-                                  <form onSubmit={handleSubmit}>
-                                    <div className="userFormGroup">
-                                      <label>Team Name:</label>
-                                      <input
-                                        type="Text"
-                                        name="name"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        value={values.name}
-                                      />
-                                      {touched.name &&
-                                        errors &&
-                                        errors.name && (
-                                          <div className="userFormErrorBlock">
-                                            {errors.name}
-                                          </div>
-                                        )}
-                                    </div>
+                                    <form onSubmit={handleSubmit}>
+                                      <div className="userFormGroup">
+                                        <label>Team Name:</label>
+                                        <input
+                                          type="Text"
+                                          name="name"
+                                          onChange={handleChange}
+                                          onBlur={handleBlur}
+                                          value={values.name}
+                                        />
+                                        {touched.name &&
+                                          errors &&
+                                          errors.name && (
+                                            <div className="userFormErrorBlock">
+                                              {errors.name}
+                                            </div>
+                                          )}
+                                      </div>
 
-                                    <div className="user-submit-block">
-                                      <Button type="submit">Next ></Button>
-                                    </div>
-                                  </form>
-                                )}
+                                      <div className="user-submit-block">
+                                        <Button type="submit">Next ></Button>
+                                      </div>
+                                    </form>
+                                  )}
                               />
                             </div>
                           </div>
