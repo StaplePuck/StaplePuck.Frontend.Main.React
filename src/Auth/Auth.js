@@ -15,6 +15,7 @@ export default class Auth {
   userProfile;
   apolloClient;
   tokenRenewalTimeout;
+  userName;
 
   auth0 = new auth0.WebAuth({
     domain: AUTH_CONFIG.domain,

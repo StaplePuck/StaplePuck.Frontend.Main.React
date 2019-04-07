@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
@@ -10,6 +9,7 @@ import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
 import { QueryGetLeagueTeams } from "./Queries/LeagueTeamListQuery";
+import { GetProfileQuery } from "../User/Queries/GetUserQuery"
 //import { LeagueTeamsColumns } from "./LeagueTeamsColumns";
 
 //Assests
@@ -25,6 +25,16 @@ const apolloClient = new ApolloClient({
 
 class LeagueTeams extends Component {
   render() {
+
+    this.props.auth.apolloClient !== undefined &&
+      this.props.auth.apolloClient
+        .query({
+          query: GetProfileQuery
+        })
+        .then(result => (
+          result.data.currentUser !== null && (this.props.auth.userName = result.data.currentUser.name))
+        );
+
     const { isAuthenticated } = this.props.auth;
     let leagueid = {
       leagueid: this.props.match.params.id
@@ -37,7 +47,7 @@ class LeagueTeams extends Component {
         accessor: "name",
         id: "id",
         Cell: props => (
-          this.props.auth.tokenSub === props.original.gM.externalId ? (
+          this.props.auth.tokenSub === props.original.gM.externalId && isAuthenticated() ? (
             <span>
               <div className="rt-mobileHeader">
                 Team:
@@ -92,7 +102,7 @@ class LeagueTeams extends Component {
       ,
       {
         Header: "Team GM",
-        accessor: "fantasyTeams.gM.name",
+        accessor: "gM.name",
         Cell: props => (
           <span>
             <div className="rt-mobileHeader">
@@ -119,7 +129,7 @@ class LeagueTeams extends Component {
       <ApolloProvider client={apolloClient}>
         <div className="allLeagues">
           <img className="mainLogo" src={Logo} alt="Logo" />
-          <Query variables={leagueid} query={QueryGetLeagueTeams}>
+          <Query variables={leagueid} query={QueryGetLeagueTeams} fetchPolicy="cache-and-network">
             {({ loading, error, data }) => {
               if (loading) return <div>Loading League Data...</div>;
               if (error) return <div>Error Loading League Data...</div>;
@@ -128,6 +138,7 @@ class LeagueTeams extends Component {
                 return <div>No league data was returned</div>;
               }
               return (
+
                 <div>
                   {data.leagues.map(league => (
                     <div key={league.id}>
@@ -135,40 +146,30 @@ class LeagueTeams extends Component {
                       Please pay Nick Hetland $10 in person or through <a href="https://venmo.com/Nick-Hetland" target="_blank">Venmo</a> and include your team name.<br />
                       {league.announcement}
 
-                      {!isAuthenticated() && <div><br />Log in to join this league</div>}
                       {/* Determine if we can show the Join Leage button */}
-                      {isAuthenticated() && // The user has to be logged in
-                        league.isLocked === false && // The league can't be locked
-                        (league.allowMultipleTeams === true || // The league allow multiple teams
-                          league.fantasyTeams.length === 0) && ( // There are no fantasy teams created at all
-                          <Link
-                            className="link-style"
-                            to={`/hockey/createteam/${
-                              this.props.match.params.id
-                              }`}
-                          >
-                            Join League
-                            </Link>
+                      {console.log(this.props.auth.userName)}
+                      {
+                        // The user has to be logged in
+                        !isAuthenticated() ? (<div><br /><b>Log in to join this league.</b></div>) :
+                          (
+                            this.props.auth.userName === undefined ? (<div><br /><b>You need to set your a user handle in the My Profile page in order to create a team.</b></div>) :
+                              (
+                                league.isLocked === true ? (<div><br />This league is locked</div>) : // The league can't be locked
+                                  ((league.allowMultipleTeams === true || // The league allows multiple teams
+                                    league.fantasyTeams.length === 0 || // There are no fantasy teams created at all
+                                    league.fantasyTeams.some(val => val.gM.externalId !== this.props.auth.tokenSub)) && // The user has not created a fantasy team yet
+                                    <div>
+                                      <br />
+                                      <Link
+                                        className="link-style"
+                                        to={`/hockey/createteam/${this.props.match.params.id}`}>
+                                        Join League
+                                      </Link>
+                                    </div>)
+                              )
+                          )
+                      }
 
-                        )}
-
-                      {isAuthenticated() && // The user has to be logged in
-                        league.isLocked !== false && // The league can't be locked
-                        league.fantasyTeams.some(
-                          val =>
-                            val.gM.externalId !== this.props.auth.tokenSub && ( // The user has not created a fantasy team yet
-                              <Button bsStyle="primary" className="btn-margin">
-                                <Link
-                                  className="createTeamBtn"
-                                  to={`/hockey/createteam/${
-                                    this.props.match.params.id
-                                    }`}
-                                >
-                                  Join League
-                                </Link>
-                              </Button>
-                            )
-                        )}
                       <ReactTable
                         data={league.fantasyTeams}
                         columns={LeagueTeamsColumns}
