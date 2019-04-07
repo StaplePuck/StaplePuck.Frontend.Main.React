@@ -14,6 +14,7 @@ export const QueryGetLeagueTeams = gql`
         id
         gM {
           externalId
+          name
         }
       }
     }
