@@ -51,6 +51,32 @@ class SetHockeyLineup extends Component {
     return '';
   }
 
+  CompareTeamSeasons(a, b) {
+    const teamA = a.team.fullName;
+    const teamB = b.team.fullName;
+
+    let comparison = 0;
+    if (teamA > teamB) {
+      comparison = 1;
+    } else if (teamA < teamB) {
+      comparison = -1;
+    }
+    return comparison;
+ }
+ ComparePlayerSeasons(a, b) {
+  const playerA = a.player.fullName;
+  const playerB = b.player.fullName;
+
+  let comparison = 0;
+  if (playerA > playerB) {
+    comparison = 1;
+  } else if (playerA < playerB) {
+    comparison = -1;
+  }
+  return comparison;
+}
+ //playerSeasons
+
   render() {
     let teamId = {
       teamId: this.props.match.params.id
@@ -138,10 +164,10 @@ class SetHockeyLineup extends Component {
                                       <Form className="teamForm">
                                         <h4> {Fteams.name}</h4>
                                         <div>
-                                          {Fteams.league.season.teamSeasons.map(
+                                          {Fteams.league.season.teamSeasons.sort(this.CompareTeamSeasons).map(
                                             NHLTeam => (
-                                              <div>
-                                                <div key={NHLTeam.team.id} className="teamFormLabel">
+                                              <div key={NHLTeam.team.id}>
+                                                <div className="teamFormLabel">
                                                   <label>
                                                     {NHLTeam.team.fullName}:
                                                   </label>
@@ -152,7 +178,7 @@ class SetHockeyLineup extends Component {
                                                   className="teamFormSelect"
                                                   placeholder="Select...">
                                                   <option value="">Select..</option>
-                                                  {NHLTeam.playerSeasons.map(
+                                                  {NHLTeam.playerSeasons.sort(this.ComparePlayerSeasons).map(
                                                     Players => (
                                                       <option
                                                         key={Players.player.id}
