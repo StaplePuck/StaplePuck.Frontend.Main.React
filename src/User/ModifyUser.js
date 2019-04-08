@@ -4,6 +4,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { Mutation } from "react-apollo";
 import { AddUserQuery } from "./Queries/AddUserQuery";
+import history from "../history";
 
 //Assests
 import "../Assets/css/User/UserProfile.css";
@@ -21,12 +22,13 @@ const ProfileShema = Yup.object().shape({
 
 const AddUser = () => (
   <Mutation mutation={AddUserQuery}>
-    {(updateUser, { loading, error }) => (
+    {(updateUser, { loading, error, data }) => (
       <div className="userProfile">
         <div className="userform">
           <h5>Set your StaplePuck user handle</h5>
-          {loading && console.log(loading)}
+          {loading && <div>Saving...</div>}
           {error && console.log(error)}
+          {data && data.updateUser && alert("Save Successful")}
           <Formik
             initialValues={{
               handle: "",
