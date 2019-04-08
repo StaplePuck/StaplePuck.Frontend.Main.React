@@ -4,7 +4,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { Mutation } from "react-apollo";
 import { AddUserQuery } from "./Queries/AddUserQuery";
-import history from "../history";
+import { GetProfileQuery } from "./Queries/GetUserQuery";
 
 //Assests
 import "../Assets/css/User/UserProfile.css";
@@ -21,7 +21,12 @@ const ProfileShema = Yup.object().shape({
 
 
 const AddUser = () => (
-  <Mutation mutation={AddUserQuery}>
+  <Mutation mutation={AddUserQuery}
+    refetchQueries={() => {
+      return [{
+        query: GetProfileQuery
+      }];
+    }}>
     {(updateUser, { loading, error, data }) => (
       <div className="userProfile">
         <div className="userform">
