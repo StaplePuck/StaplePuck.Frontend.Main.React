@@ -20,7 +20,7 @@ class UserProfile extends Component {
           <div className="userProfile">
             <img className="mainLogo" src={Logo} alt="Logo" />
             <h2>StaplePuck Profile</h2>
-            <Query query={GetProfileQuery}>
+            <Query query={GetProfileQuery} fetchPolicy="cache-and-network">
               {({ loading, error, data }) => {
                 if (loading) return <div>Fetching Profile...</div>;
                 if (error) return <div>Error Fetching Profile...</div>;
