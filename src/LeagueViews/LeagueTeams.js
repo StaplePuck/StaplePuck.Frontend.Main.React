@@ -174,6 +174,7 @@ class LeagueTeams extends Component {
                         data={league.fantasyTeams}
                         columns={LeagueTeamsColumns}
                         minRows={1}
+                        pageSize={100}
                         resizable={false}
                         showPagination={false}
                         noDataText="Bloody hell... No teams!"
