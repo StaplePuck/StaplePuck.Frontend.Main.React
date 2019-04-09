@@ -77,17 +77,17 @@ class LeagueTeams extends Component {
         }
       },
       {
-        Header: "Points",
-        accessor: "teamScore",
+        Header: "Score",
+        accessor: "score",
         Cell: props => (
           <span>
             <div className="rt-mobileHeader">
-              Points:
+              Score:
             </div>
             {props.value}
           </span>
         ),
-        style: { textAlign: "left" },
+        style: { textAlign: "center" },
         headerStyle: {
           color: "#000",
           background: "rgb(255,214,94)",
@@ -98,8 +98,30 @@ class LeagueTeams extends Component {
           background:
             "linear-gradient(to bottom, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)"
         }
-      }
-      ,
+      },
+      {
+        Header: "Today's Score",
+        accessor: "todaysScore",
+        Cell: props => (
+          <span>
+            <div className="rt-mobileHeader">
+              Today's Score:
+            </div>
+            {props.value}
+          </span>
+        ),
+        style: { textAlign: "center" },
+        headerStyle: {
+          color: "#000",
+          background: "rgb(255,214,94)",
+          background:
+            "-moz-linear-gradient(top, rgba(255,214,94,1) 0%, rgba(254,191,4,1) 100%)",
+          background:
+            "-webkit-linear-gradient(top, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)",
+          background:
+            "linear-gradient(to bottom, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)"
+        }
+      },
       {
         Header: "Team GM",
         accessor: "gM.name",
@@ -147,7 +169,7 @@ class LeagueTeams extends Component {
                       {league.announcement}
 
                       {/* Determine if we can show the Join Leage button */}
-                      {console.log(this.props.auth.userName)}
+                      {/* {console.log(league.fantasyTeams.filter(val => val.gM.externalId === this.props.auth.tokenSub).length < 0)} */}
                       {
                         // The user has to be logged in
                         !isAuthenticated() ? (<div><br /><b>Log in to join this league.</b></div>) :
@@ -157,7 +179,7 @@ class LeagueTeams extends Component {
                                 league.isLocked === true ? (<div><br />This league is locked</div>) : // The league can't be locked
                                   ((league.allowMultipleTeams === true || // The league allows multiple teams
                                     league.fantasyTeams.length === 0 || // There are no fantasy teams created at all
-                                    league.fantasyTeams.some(val => val.gM.externalId !== this.props.auth.tokenSub)) && // The user has not created a fantasy team yet
+                                    league.fantasyTeams.filter(val => val.gM.externalId === this.props.auth.tokenSub).length < 0) && // The user has not created a fantasy team yet
                                     <div>
                                       <br />
                                       <Link
