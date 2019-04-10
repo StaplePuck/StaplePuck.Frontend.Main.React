@@ -62,20 +62,20 @@ class SetHockeyLineup extends Component {
       comparison = -1;
     }
     return comparison;
- }
- ComparePlayerSeasons(a, b) {
-  const playerA = a.player.fullName;
-  const playerB = b.player.fullName;
-
-  let comparison = 0;
-  if (playerA > playerB) {
-    comparison = 1;
-  } else if (playerA < playerB) {
-    comparison = -1;
   }
-  return comparison;
-}
- //playerSeasons
+  ComparePlayerSeasons(a, b) {
+    const playerA = a.player.fullName;
+    const playerB = b.player.fullName;
+
+    let comparison = 0;
+    if (playerA > playerB) {
+      comparison = 1;
+    } else if (playerA < playerB) {
+      comparison = -1;
+    }
+    return comparison;
+  }
+  //playerSeasons
 
   render() {
     let teamId = {
@@ -95,7 +95,26 @@ class SetHockeyLineup extends Component {
               You must selcet one player from each NHL team and the following number of players:
               10 Forwards (F),
               4 Defenseman (D), and
-              2 Goalies (G)
+              2 Goalies (G)<br />
+              :Scoring Rules:<br />
+              Forwards -
+              Points per Goal: 3
+              Points per Assist: 2
+              <br />
+              Defensemen -
+              Points per Goal: 4
+              Points per Assist: 3
+              <br />
+              Goalies -
+              Win: 5
+              Shutout: 5
+              Points per Goal: 10
+              Points per Assist: 4
+              <br />
+              Bonus points -
+              Overtime goal: +5
+              Series clinching goal: +5
+              Shorthanded goal: +2
             </div>
             <Query variables={teamId} query={QueryGetNHLData}>
               {({ loading, error, data }) => {
