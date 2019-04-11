@@ -12,6 +12,8 @@ import LoginPage from "./Home/Login";
 import LeaguePage from "./LeagueViews/LeagueTeams";
 import CreateHockeyTeam from "./Hockey/Pages/CreateHockeyTeam";
 import SetHockeyLineup from "./Hockey/Pages/SetHockeyLineup";
+import HockeyTeamDetail from "./Hockey/Pages/HockeyTeamDetail";
+
 
 const auth = new Auth();
 
@@ -48,8 +50,8 @@ export const makeMainRoutes = () => {
               auth.isAuthenticated() ? (
                 <MyLeagues auth={auth} {...props} />
               ) : (
-                <Redirect to="/login" />
-              )
+                  <Redirect to="/login" />
+                )
             }
           />
           <Route
@@ -74,6 +76,11 @@ export const makeMainRoutes = () => {
             exact
             path="/hockey/setlineup/:id"
             render={props => <SetHockeyLineup auth={auth} {...props} />}
+          />
+          <Route
+            exact
+            path="/hockey/teamdetail/:id"
+            render={props => <HockeyTeamDetail auth={auth} {...props} />}
           />
         </div>
       </Router>
