@@ -224,6 +224,10 @@ class LeagueTeams extends Component {
                         pageSize={100}
                         resizable={false}
                         showPagination={false}
+                        defaultSorted={[{
+                          id: 'rank',
+                          desc: false,
+                        }]}
                         noDataText="Bloody hell... No teams!"
                       />
                     </div>
