@@ -48,12 +48,12 @@ export const HockeyTeamDetailsColumns = [
         }
     },
     {
-        Header: "Todays Points",
+        Header: "Today's Points",
         accessor: "playerCalculatedScore.todaysScore",
         Cell: props => (
             <span>
                 <div className="rt-mobileHeader">
-                    Todays Points:
+                    Today's Points:
                 </div>
                 {props.value}
             </span>

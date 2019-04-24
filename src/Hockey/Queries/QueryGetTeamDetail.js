@@ -7,6 +7,7 @@ export const QueryGetTeamDetail = gql`
       name
       score
       todaysScore
+      rank
       fantasyTeamPlayers {
         player {
           id

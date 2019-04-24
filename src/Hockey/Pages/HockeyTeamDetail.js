@@ -40,6 +40,8 @@ class HockeyTeamDetail extends Component {
                                     {data.fantasyTeams.map(fteam => (
                                         <div key={fteam.name}>
                                             <h4>{fteam.name}</h4>
+                                            League Ranking: {fteam.rank}<br />
+                                            Total Score: {fteam.score}
                                             <div>
                                                 <ReactTable
                                                     data={fteam.fantasyTeamPlayers}
