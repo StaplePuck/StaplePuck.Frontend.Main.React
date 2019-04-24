@@ -3,16 +3,28 @@ import { gql } from "apollo-boost";
 export const QueryGetTeamDetail = gql`
   query getFantasty($teamId: String) {
     fantasyTeams(id: $teamId) {
+      id
       name
+      score
+      todaysScore
       fantasyTeamPlayers {
         player {
           id
           fullName
-          number
-          playerSeasons {
-            team {
-              fullName
+        }
+        playerCalculatedScore {
+          todaysScore
+          score
+          scoring {
+            scoringType {
+              id
+              shortName
+              name
             }
+            total
+            todaysScore
+            todaysTotal
+            score
           }
         }
       }
