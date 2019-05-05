@@ -8,7 +8,7 @@ import ApolloClient from "apollo-client";
 import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
-import { QueryGetLeagueTeams } from "./Queries/LeagueTeamListQuery";
+import { QueryLeagueTeamsList } from "./Queries/QueryLeagueTeamList";
 import { GetProfileQuery } from "../User/Queries/GetUserQuery"
 
 //Assests
@@ -43,7 +43,7 @@ class LeagueTeams extends Component {
       <ApolloProvider client={apolloClient}>
         <div className="allLeagues">
           <img className="mainLogo" src={Logo} alt="Logo" />
-          <Query variables={leagueid} query={QueryGetLeagueTeams} fetchPolicy="cache-and-network">
+          <Query variables={leagueid} query={QueryLeagueTeamsList} fetchPolicy="cache-and-network">
             {({ loading, error, data }) => {
               if (loading) return <div>Loading League Data...</div>;
               if (error) return <div>Error Loading League Data...</div>;
@@ -58,7 +58,6 @@ class LeagueTeams extends Component {
                       {league.announcement}
 
                       {/* Determine if we can show the Join Leage button */}
-                      {/* {console.log(league.fantasyTeams.filter(val => val.gM.externalId === this.props.auth.tokenSub).length < 0)} */}
                       {league.isLocked === true ? (<div><br />This league is locked</div>) : // The league can't be locked
                         (!isAuthenticated() ? (<div><br /><b>Log in to join this league.</b></div>) : // The user has to be logged in
                           (this.props.auth.userName === undefined ? (<div><br /><b>You need to set your a user handle in the My Profile page in order to create a team.</b></div>) :

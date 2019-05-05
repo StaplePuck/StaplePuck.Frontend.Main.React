@@ -7,7 +7,7 @@ import ApolloClient from "apollo-client";
 import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
-import { AllLeaguesListQuery } from "../LeagueViews/Queries/AllLeaguesListQuery";
+import { QueryAllLeaguesList } from "../LeagueViews/Queries/QueryAllLeaguesList";
 import { AllLeagueColumns } from "./AllLeaguesColumns";
 
 //Assests
@@ -40,7 +40,7 @@ function ListofLeagues({ loading, error, leagues }) {
   );
 }
 
-const LeagueData = graphql(AllLeaguesListQuery, {
+const LeagueData = graphql(QueryAllLeaguesList, {
   props: ({ data: { loading, leagues } }) => ({
     loading,
     leagues

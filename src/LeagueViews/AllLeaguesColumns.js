@@ -97,30 +97,6 @@ export const AllLeagueColumns = [
         "linear-gradient(to bottom, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)"
     }
   },
-  // {
-  //   Header: "Payment Info",
-  //   accessor: "paymentInfo",
-  //   sortable: false,
-  //   Cell: props => (
-  //     <span>
-  //       <div className="rt-mobileHeader">
-  //         Payment Info:
-  //       </div>
-  //       {props.value}
-  //     </span>
-  //   ),
-  //   style: { whiteSpace: "unset", textAlign: "left" },
-  //   headerStyle: {
-  //     color: "#000",
-  //     background: "rgb(255,214,94)",
-  //     background:
-  //       "-moz-linear-gradient(top, rgba(255,214,94,1) 0%, rgba(254,191,4,1) 100%)",
-  //     background:
-  //       "-webkit-linear-gradient(top, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)",
-  //     background:
-  //       "linear-gradient(to bottom, rgba(255,214,94,1) 0%,rgba(254,191,4,1) 100%)"
-  //   }
-  // },
   {
     Header: "Announcement",
     accessor: "announcement",

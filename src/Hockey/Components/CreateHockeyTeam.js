@@ -4,7 +4,7 @@ import { ApolloProvider, Query } from "react-apollo";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Mutation } from "react-apollo";
-import { QueryGetLeagueTeams } from "../../LeagueViews/Queries/LeagueTeamListQuery";
+import { QueryLeagueTeamsList } from "../../LeagueViews/Queries/QueryLeagueTeamList";
 import { MutationCreateTeam } from "../Mutations/MutationCreateTeam";
 import LoginPage from "../../Home/Login";
 
@@ -39,7 +39,7 @@ class Createteam extends Component {
           <div className="userProfile">
             <img className="mainLogo" src={Logo} alt="Logo" />
 
-            <Query variables={leagueid} query={QueryGetLeagueTeams}>
+            <Query variables={leagueid} query={QueryLeagueTeamsList}>
               {({ loading, error, data }) => {
                 if (loading) return <div>Loading League Data...</div>;
                 if (error) return <div>Error Loading League Data...</div>;
@@ -63,7 +63,7 @@ class Createteam extends Component {
                         }}
                         refetchQueries={() => {
                           return [{
-                            query: QueryGetLeagueTeams,
+                            query: QueryLeagueTeamsList,
                             variables: leagueid
                           }];
                         }}
