@@ -10,9 +10,9 @@ import UserProfile from "./User/UserProfile";
 import ModifyUser from "./User/ModifyUser";
 import LoginPage from "./Home/Login";
 import LeaguePage from "./LeagueViews/LeagueTeams";
-import CreateHockeyTeam from "./Hockey/Pages/CreateHockeyTeam";
-import SetHockeyLineup from "./Hockey/Pages/SetHockeyLineup";
-import HockeyTeamDetail from "./Hockey/Pages/HockeyTeamDetail";
+import CreateHockeyTeam from "./Hockey/Components/CreateHockeyTeam";
+import SetHockeyLineup from "./Hockey/Components/SetHockeyLineup";
+import HockeyTeamDetail from "./Hockey/Components/HockeyTeamDetail";
 
 
 const auth = new Auth();

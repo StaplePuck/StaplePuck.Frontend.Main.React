@@ -5,22 +5,12 @@ import { Formik, Field, Form } from "formik";
 import { Mutation } from "react-apollo";
 import * as Yup from "yup";
 import { QueryGetNHLData } from "../Queries/QueryGetNHLData";
-import { MutationSetLineup } from "../Queries/MutationSetLineup";
+import { MutationSetLineup } from "../Mutations/MutationSetLineup";
 import LoginPage from "../../Home/Login";
 
 //Assets
 import "../../Assets/css/Hockey/SetLineup.css";
 import Logo from "../../Assets/Images/logo-white-with-name.jpg";
-import { transformOperation } from "apollo-link/lib/linkUtils";
-
-const ProfileShema = Yup.object().shape({
-  name: Yup.string()
-    .min(5, "Must be 5 characters or longer")
-    .max(20, "Must be 20 characters or less")
-    .required("Team Name is Required")
-});
-
-
 
 class SetHockeyLineup extends Component {
   replaceError(search, replacement) {

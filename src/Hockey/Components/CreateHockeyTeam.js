@@ -5,7 +5,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { Mutation } from "react-apollo";
 import { QueryGetLeagueTeams } from "../../LeagueViews/Queries/LeagueTeamListQuery";
-import { QueryCreateTeam } from "../Queries/CreateTeam";
+import { MutationCreateTeam } from "../Mutations/MutationCreateTeam";
 import LoginPage from "../../Home/Login";
 
 //Assests
@@ -57,7 +57,7 @@ class Createteam extends Component {
 
                     <div>
                       <Mutation
-                        mutation={QueryCreateTeam}
+                        mutation={MutationCreateTeam}
                         onCompleted={data => {
                           this.onCreateSuccess(data);
                         }}

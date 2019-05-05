@@ -1,6 +1,6 @@
 import { gql } from "apollo-boost";
 
-export const QueryCreateTeam = gql`
+export const MutationCreateTeam = gql`
   mutation($fantasyTeam: FantasyTeamInput!) {
     createFantasyTeam(fantasyTeam: $fantasyTeam) {
       id
