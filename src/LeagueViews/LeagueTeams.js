@@ -9,7 +9,7 @@ import { HttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
 import { QueryLeagueTeamsList } from "./Queries/QueryLeagueTeamList";
-import { GetProfileQuery } from "../User/Queries/GetUserQuery"
+import { QueryUserProfile } from "../User/Queries/QueryUserProfile"
 
 //Assests
 import "../Assets/css/Leagues/LeagueTables.css";
@@ -28,7 +28,7 @@ class LeagueTeams extends Component {
     this.props.auth.apolloClient !== undefined &&
       this.props.auth.apolloClient
         .query({
-          query: GetProfileQuery
+          query: QueryUserProfile
         })
         .then(result => (
           result.data.currentUser !== null && (this.props.auth.userName = result.data.currentUser.name))

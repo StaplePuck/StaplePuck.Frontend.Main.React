@@ -3,7 +3,6 @@ import { Button } from "react-bootstrap";
 import { ApolloProvider, Query } from "react-apollo";
 import { Formik, Field, Form } from "formik";
 import { Mutation } from "react-apollo";
-import * as Yup from "yup";
 import { QueryGetNHLData } from "../Queries/QueryGetNHLData";
 import { MutationSetLineup } from "../Mutations/MutationSetLineup";
 import LoginPage from "../../Home/Login";
@@ -155,7 +154,7 @@ class SetHockeyLineup extends Component {
                                   initialValues={initValues}
                                   onSubmit={values => {
                                     var fantasyTeamPlayersArray = [];
-                                    for (let [key, value] of Object.entries(values)) {
+                                    for (let [value] of Object.entries(values)) {
                                       fantasyTeamPlayersArray.push({ playerId: parseInt(value, 10) });
                                     }
 
