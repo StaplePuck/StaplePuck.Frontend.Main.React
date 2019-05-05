@@ -15,12 +15,6 @@ class TopNavBar extends Component {
             <li>
               <Link to="/">Home</Link>
             </li>
-            {/* <li>
-              <Link to="/">All Leagues</Link>
-            </li> */}
-            {/* <li>
-              <Link to="/myleagues">My Leagues</Link>
-            </li> */}
 
             {isAuthenticated() && (
               <li>

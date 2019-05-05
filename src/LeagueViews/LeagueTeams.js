@@ -10,7 +10,6 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 
 import { QueryGetLeagueTeams } from "./Queries/LeagueTeamListQuery";
 import { GetProfileQuery } from "../User/Queries/GetUserQuery"
-//import { LeagueTeamsColumns } from "./LeagueTeamsColumns";
 
 //Assests
 import "../Assets/css/Leagues/LeagueTables.css";
@@ -56,7 +55,6 @@ class LeagueTeams extends Component {
                   {data.leagues.map(league => (
                     <div key={league.id}>
                       <h2 key={league.name}>{league.name}</h2>
-                      Please pay Nick Hetland $10 in person or through <a href="https://venmo.com/Nick-Hetland" target="_blank">Venmo</a> and include your team name.<br />
                       {league.announcement}
 
                       {/* Determine if we can show the Join Leage button */}
