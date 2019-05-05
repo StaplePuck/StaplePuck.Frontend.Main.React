@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ApolloProvider, Query } from "react-apollo";
-import { GetProfileQuery } from "./Queries/GetUserQuery";
+import { QueryUserProfile } from "./Queries/QueryUserProfile";
 import ModifyUser from "./ModifyUser";
 import UpdateEmailPref from "./UpdateEmailPref";
 import LoginPage from "../Home/Login";
@@ -20,7 +20,7 @@ class UserProfile extends Component {
           <div className="userProfile">
             <img className="mainLogo" src={Logo} alt="Logo" />
             <h2>StaplePuck Profile</h2>
-            <Query query={GetProfileQuery} fetchPolicy="cache-and-network">
+            <Query query={QueryUserProfile} fetchPolicy="cache-and-network">
               {({ loading, error, data }) => {
                 if (loading) return <div>Fetching Profile...</div>;
                 if (error) return <div>Error Fetching Profile...</div>;

@@ -3,8 +3,8 @@ import { Button } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Mutation } from "react-apollo";
-import { AddUserQuery } from "./Queries/AddUserQuery";
-import { GetProfileQuery } from "./Queries/GetUserQuery";
+import { MutationAddUser } from "./Mutations/MutationAddUser";
+import { QueryUserProfile } from "./Queries/QueryUserProfile";
 
 //Assests
 import "../Assets/css/User/UserProfile.css";
@@ -16,10 +16,10 @@ const ProfileShema = Yup.object().shape({
 });
 
 const UpdateEmailPref = props => (
-  <Mutation mutation={AddUserQuery}
+  <Mutation mutation={MutationAddUser}
     refetchQueries={() => {
       return [{
-        query: GetProfileQuery
+        query: QueryUserProfile
       }];
     }}
     onCompleted={data => {
@@ -83,7 +83,7 @@ const UpdateEmailPref = props => (
                     <Button type="submit">Update</Button>
                   </div>
                   <br />
-                  <a target="_blank" href="https://www.termsfeed.com/privacy-policy/1d035b59d3dcbf692dbce4eead4ec7d8">Leagal Stuff</a>
+                  <a target="_blank" rel="noopener noreferrer" href="https://www.termsfeed.com/privacy-policy/1d035b59d3dcbf692dbce4eead4ec7d8">Leagal Stuff</a>
                 </form>
               )}
           />
