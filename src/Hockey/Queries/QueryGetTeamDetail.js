@@ -13,6 +13,14 @@ export const QueryGetTeamDetail = gql`
           id
           fullName
         }
+        playerSeason {
+          team {
+            name
+          }
+          positionType {
+            shortName
+          }
+        }
         playerCalculatedScore {
           todaysScore
           score
