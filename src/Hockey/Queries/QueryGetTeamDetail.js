@@ -1,7 +1,7 @@
 import { gql } from "apollo-boost";
 
 export const QueryGetTeamDetail = gql`
-  query getFantasty($teamId: String) {
+  query getFantasty($teamId: ID) {
     fantasyTeams(id: $teamId) {
       id
       name
